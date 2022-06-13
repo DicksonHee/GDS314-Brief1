@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChairAssignment : MonoBehaviour
 {
     public Transform[] chairPositions;
-    private List<bool> spawnList;
+    public List<bool> spawnList;
     private int selectedPosition;
     private int numberOfChairs;
     private Transform currentPosition;
@@ -19,33 +19,32 @@ public class ChairAssignment : MonoBehaviour
     // CHECK WHERE THE SPAWN LIST IS TRUE AND THEN SPAWN A CHAIR AT THE CORRESPONDING POSITION
     // MAY NEED CHAIR NUMBER FROM THE VARIABLE numberOfChairs
 
+
+
+
+
     void ArraySelect()
     {
         // number of chairs to be thrown
         numberOfChairs = Random.Range(1, chairPositions.Length - 1);
+
         // which lanes are selected
 
 
-        //for (int i = 0; spawnList.Count < numberOfChairs; i++)
-        //{
-            // position of the chair that will spawn = a point in the chair positions
-            //selectedPosition = Random.Range(0, chairPositions.Length);
-            // if any of the previous positions were already used then do another (may be a little process heavy)
+        for (int i = 0; i < numberOfChairs; i++)
+        {
+            spawnList[i] = true;
+        }
+        for (int k = 0; k < spawnList.Count; k++)
+        {
+            bool temp = spawnList[k];
+            int randomiser = Random.Range(k, spawnList.Count);
+            spawnList[k] = spawnList[randomiser];
+            spawnList[randomiser] = temp;
+        }
+        
+        
 
-            
-
-
-            //for (j = 0; j < previousPositions.Length; j++)
-            //{
-            //    if (previousPositions[j] != selectedPosition)
-            //    {
-            //        Instantiate(chair, chairPositions[selectedPosition]);
-            //    }
-            //}
-            
-
-                
-            // 
     }
         
 
