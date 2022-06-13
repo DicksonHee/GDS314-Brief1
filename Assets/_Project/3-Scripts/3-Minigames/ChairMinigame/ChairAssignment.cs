@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChairAssignment : MonoBehaviour
 {
     public Transform[] chairPositions;
-    public List<bool> spawnList;
+    private List<bool> spawnList;
     private int numberOfChairs;
     public GameObject chair;
 
@@ -28,6 +28,7 @@ public class ChairAssignment : MonoBehaviour
         {
             AddBool();
             ArrayShuffle();
+            CreateAChair();
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -54,6 +55,19 @@ public class ChairAssignment : MonoBehaviour
         }
 
     }
+
+    void CreateAChair()
+    {
+        for (int iii = 0; iii < chairPositions.Length; iii++)
+        {
+            if (spawnList[iii] == true)
+            {
+                Instantiate(chair, chairPositions[iii]);
+                
+            }
+        }
+    }
+    
 
     void AddBool()
     {
