@@ -5,11 +5,9 @@ using UnityEngine;
 public class ChairAssignment : MonoBehaviour
 {
     public Transform[] chairPositions;
-    private List<bool> spawnList;
-    private int numberOfChairs;
     public GameObject chair;
 
-
+    private List<bool> spawnList;
 
     // USE THE LIST TO RANDOMISE THE CHAIRS USED
     // ALSO ADD THE CHAIRS TO SPAWN NUMBER OF TRUE VARIABLES TO THE LIST
@@ -25,10 +23,11 @@ public class ChairAssignment : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
+
         {
-            AddBool();
+            AddChairs(Random.Range(1, chairPositions.Length - 1));
             ArrayShuffle();
-            CreateAChair();
+            SpawnChairs();
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -38,65 +37,55 @@ public class ChairAssignment : MonoBehaviour
     }
 
 
-    void ArrayShuffle()
+    // Randomise spawnList array
+    private void ArrayShuffle()
     {
-        // number of chairs to be thrown
-        
-
-        // which lanes are selected
-
-        
-        for (int k = 0; k < spawnList.Count; k++)
+        for (int ii = 0; ii < spawnList.Count; ii++)
         {
-            bool temp = spawnList[k];
-            int randomiser = Random.Range(k, spawnList.Count);
-            spawnList[k] = spawnList[randomiser];
+            bool temp = spawnList[ii];
+            int randomiser = Random.Range(ii, spawnList.Count);
+            spawnList[ii] = spawnList[randomiser];
             spawnList[randomiser] = temp;
         }
 
     }
 
-    void CreateAChair()
+    // Spawn chairs at location
+    private void SpawnChairs()
     {
-        for (int iii = 0; iii < chairPositions.Length; iii++)
+        for (int ii = 0; ii < chairPositions.Length; ii++)
         {
-            if (spawnList[iii] == true)
+            if (spawnList[ii] == true)
             {
-                Instantiate(chair, chairPositions[iii]);
+                Instantiate(chair, chairPositions[ii]);
                 
             }
         }
     }
     
-
-    void AddBool()
+    // Add numberOfChairs to spawn to spawnList
+    private void AddChairs(int numberOfChairs)
     {
-        numberOfChairs = Random.Range(1, chairPositions.Length);
+        ResetList();
         // for how many chair positions there are
         for (int ii = 0; ii < chairPositions.Length; ii++)
         {
-            // if the number of chairs determined before is more than 0 then add a true value
-            if (0 < numberOfChairs)
+            if (0 < numberOfChairs) // if the number of chairs determined before is more than 0 then add a true value
             {
                 spawnList.Add(true);
                 numberOfChairs--;
             }
-            // when you run out of chairs you then must add a false value until the array is full
-            else
+            else // when you run out of chairs you then must add a false value until the array is full
             {
                 spawnList.Add(false);
             }
                 
         }
     }
-    void ResetList()
+
+    // Reset spawnList
+    private void ResetList()
     {
         spawnList.Clear();
     }
-    
-        
-
-        
-    
-
 }
