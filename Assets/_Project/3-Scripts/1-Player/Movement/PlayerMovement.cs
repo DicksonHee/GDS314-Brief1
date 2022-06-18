@@ -12,7 +12,7 @@ namespace MyPlayer.Movement
         private Vector3 _forceModifier;
 
         public float movementSpeed = 5f;
-
+        
         public static Action<float, float> OnApplyForce;
         
         private void Start()
@@ -35,13 +35,11 @@ namespace MyPlayer.Movement
         private void Update()
         {
             CheckInput();
-            ApplyMovement();
         }
 
         private void FixedUpdate()
         {
-            //
-            //ApplyMovement();
+            ApplyMovement();
         }
 
         private void CheckInput()
@@ -51,17 +49,10 @@ namespace MyPlayer.Movement
             _playerInput = _playerInput.normalized;
         }
 
-        //private void ApplyMovement()
-        //{
-        //    Vector3 inputDir = _playerInput * (movementSpeed * Time.fixedDeltaTime);
-        //    Vector3 forceDir = _forceModifier * (movementSpeed * Time.fixedDeltaTime * 0.9f);
-        //    _rigidbody.MovePosition(_rigidbody.position + inputDir + forceDir);
-        //}
-
         private void ApplyMovement()
         {
-            Vector3 inputDir = _playerInput * (movementSpeed * Time.deltaTime);
-            Vector3 forceDir = _forceModifier * (movementSpeed * Time.deltaTime * 0.9f);
+            Vector3 inputDir = _playerInput * (movementSpeed * Time.fixedDeltaTime);
+            Vector3 forceDir = _forceModifier * (movementSpeed * Time.fixedDeltaTime * 0.9f);
             _rigidbody.MovePosition(_rigidbody.position + inputDir + forceDir);
         }
 
