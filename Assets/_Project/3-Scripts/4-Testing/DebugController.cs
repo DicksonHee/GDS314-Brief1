@@ -17,8 +17,9 @@ namespace Testing
         public List<string> stringInputs;
         public int inputAmount = 100;
         public MinigameScraper Scraper;
-        
-        private void Update()
+
+
+		private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Backslash)) _showConsole = !_showConsole;
             if (Input.GetKeyDown(KeyCode.Return) && _showConsole) HandleInput();
