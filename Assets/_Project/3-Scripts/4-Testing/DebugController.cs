@@ -18,13 +18,6 @@ namespace Testing
         public int inputAmount = 100;
         public MinigameScraper Scraper;
 
-        private ChairScraper chairScraper;
-
-
-        private void Awake()
-		{
-            chairScraper = (ChairScraper)Scraper;
-        }
 
 		private void Update()
         {

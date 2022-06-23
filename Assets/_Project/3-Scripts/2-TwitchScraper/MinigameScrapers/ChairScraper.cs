@@ -82,6 +82,14 @@ public class ChairScraper : MinigameScraper
             }
         }
 
+        string debugMessage = "";
+        foreach (var item in _countList)
+        {
+            debugMessage += item.Key + ": " + item.Value;
+        }
+
+
+        Debug.Log(debugMessage);
         return sortedDirections;
     }
 }
