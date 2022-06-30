@@ -24,9 +24,6 @@ public class LavaScraper : MinigameScraper
         
         _pollList.Enqueue(message);
         AddMessage(message);
-
-        CalculateForce(out float xForce, out float zForce);
-        PlayerMovement.OnApplyForce(xForce, zForce);
     }
 
     public override void GetMessageTest(string message)
@@ -37,12 +34,17 @@ public class LavaScraper : MinigameScraper
         }
         
         _pollList.Enqueue(message);
-        AddMessage(message);
-        
-        CalculateForce(out float xForce, out float zForce);
+        AddMessage(message);        
+    }
+
+    public void ApplyChatInputForce()
+    {
+        float xForce = 0;
+		float zForce = 0;
+		CalculateForce(out xForce, out zForce);
         PlayerMovement.OnApplyForce(xForce, zForce);
     }
-    
+
     private void AddMessage(string message)
     {
         _countList[message]++;
@@ -59,10 +61,9 @@ public class LavaScraper : MinigameScraper
 
     private void CalculateForce(out float xForce, out float zForce)
     {
+
+
         xForce = (float) _countList["right"] / _pollList.Count - (float) _countList["left"] / _pollList.Count;
         zForce = (float) _countList["up"] / _pollList.Count - (float) _countList["down"] / _pollList.Count;
-        
-        DebugMessage("" + xForce);
-        DebugMessage("" + zForce);
     }
 }

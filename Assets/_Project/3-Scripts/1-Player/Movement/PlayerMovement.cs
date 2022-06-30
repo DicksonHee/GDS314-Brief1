@@ -7,6 +7,8 @@ namespace MyPlayer.Movement
 {
     public class PlayerMovement : MonoBehaviour
     {
+        public static PlayerMovement current;
+
         private Rigidbody _rigidbody;
         private Vector3 _playerInput;
         private Vector3 _forceModifier;
@@ -14,8 +16,13 @@ namespace MyPlayer.Movement
         public float movementSpeed = 5f;
         
         public static Action<float, float> OnApplyForce;
-        
-        private void Start()
+
+		private void Awake()
+		{
+			current = this;
+		}
+
+		private void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
             _playerInput = Vector3.zero;
@@ -46,20 +53,31 @@ namespace MyPlayer.Movement
         {
             _playerInput.x = Input.GetAxisRaw("Horizontal");
             _playerInput.z = Input.GetAxisRaw("Vertical");
-            _playerInput = _playerInput.normalized;
         }
 
         private void ApplyMovement()
         {
-            Vector3 inputDir = _playerInput * (movementSpeed * Time.fixedDeltaTime);
-            Vector3 forceDir = _forceModifier * (movementSpeed * Time.fixedDeltaTime * 0.9f);
-            _rigidbody.MovePosition(_rigidbody.position + inputDir + forceDir);
+            Vector3 inputDir = _playerInput * (movementSpeed * Time.deltaTime);
+            Vector3 forceDir = _forceModifier * (movementSpeed * 0.9f * Time.deltaTime);
+            _rigidbody.AddForce(inputDir + forceDir, ForceMode.VelocityChange);
+            //_rigidbody.MovePosition(_rigidbody.position + inputDir + forceDir);
         }
 
         private void SetForceModifier(float xVal, float zVal)
         {
+            Debug.Log(_forceModifier);
+            
             _forceModifier.x = xVal;
             _forceModifier.z = zVal;
+            Debug.Log(_forceModifier);
+        }
+
+        public void ApplyForce(Vector3 forceDir)
+        {
+            Vector3 force = forceDir;
+            if (_forceModifier.x == 1) force.x = 0;
+            if (_forceModifier.z == 1) force.z = 0;
+            _rigidbody.AddForce(force, ForceMode.Force);
         }
     }
 }
