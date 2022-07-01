@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using MyPlayer.Movement;
 using UnityEngine;
 
 namespace PA.MinigameManager
 {
 	public class FallingGM : MinigameManager
 	{
-		LavaScraper lavaScraper;
+		private LavaScraper lavaScraper;
+		public Transform spawnPosition;
 
 		protected override void Awake()
 		{
 			lavaScraper = (LavaScraper)scraper;
+			PreGameState();
 			StartCoroutine(MinigameProtocol_CO());
 		}
 
@@ -22,6 +25,7 @@ namespace PA.MinigameManager
 		protected override void PreGameState()
 		{
 			base.PreGameState();
+			PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
 			Debug.Log("Pre");
 		}
 
@@ -51,7 +55,6 @@ namespace PA.MinigameManager
 
 		protected override IEnumerator MinigameProtocol_CO()
 		{
-			PreGameState();
 			yield return new WaitForSeconds(_initialStartDelay);
 			AcceptingInputsState();
 			yield return new WaitForSeconds(_acceptingInputDuration);

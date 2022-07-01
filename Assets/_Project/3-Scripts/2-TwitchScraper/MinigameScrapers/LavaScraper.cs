@@ -39,9 +39,7 @@ public class LavaScraper : MinigameScraper
 
     public void ApplyChatInputForce()
     {
-        float xForce = 0;
-		float zForce = 0;
-		CalculateForce(out xForce, out zForce);
+        CalculateForce(out float xForce, out float zForce);
         PlayerMovement.OnApplyForce(xForce, zForce);
     }
 
@@ -61,8 +59,9 @@ public class LavaScraper : MinigameScraper
 
     private void CalculateForce(out float xForce, out float zForce)
     {
-
-
+        xForce = 0;
+        zForce = 0;
+        if (_pollList.Count <= 0) return;
         xForce = (float) _countList["right"] / _pollList.Count - (float) _countList["left"] / _pollList.Count;
         zForce = (float) _countList["up"] / _pollList.Count - (float) _countList["down"] / _pollList.Count;
     }
