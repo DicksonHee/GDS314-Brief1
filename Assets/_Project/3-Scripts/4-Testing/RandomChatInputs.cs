@@ -44,8 +44,8 @@ namespace  Testing
         private IEnumerator UpdateRanges()
         {
             yield return new WaitForSeconds(Random.Range(0f, 2f));
-            highRange = Mathf.Clamp(Random.Range(0, inputs.Count), 0, inputs.Count);
-            lowRange = Random.Range(0, highRange);
+            lowRange = Random.Range(0, inputs.Count);
+            highRange = Mathf.Clamp(Random.Range(lowRange, inputs.Count), 0, inputs.Count);
             StartCoroutine(UpdateRanges());
         }
     }

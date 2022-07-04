@@ -19,7 +19,8 @@ namespace MyPlayer.Movement
         private Vector3 _forceDir;
         
         private bool _isGrounded;
-
+        private bool _canMove;
+        
         public Transform playerModel;
         public Animator playerAnimator;
 
@@ -60,6 +61,7 @@ namespace MyPlayer.Movement
         {
             CheckInput();
             CheckGrounded();
+            CheckCanMove();
             HandleAnimation();
         }
 
@@ -71,19 +73,23 @@ namespace MyPlayer.Movement
 
         private void CheckInput()
         {
+            if (!_canMove) return;
+            
             _playerInput.x = Input.GetAxisRaw("Horizontal");
             _playerInput.z = Input.GetAxisRaw("Vertical");
         }
 
         private void ApplyMovement()
         {
-            if (!CanMove()) return;
-            
-            _inputDir = _playerInput * (movementSpeed * Time.deltaTime);
-            _forceDir = (_twitchForceModifier.normalized + _outwardForceModifier.normalized) * (movementSpeed * 0.9f * Time.deltaTime);
-            Vector3 movementDir = _inputDir + _forceDir;
-            movementDir.y = _rigidbody.velocity.y;
-            _rigidbody.velocity = movementDir;
+            if (!_canMove) _rigidbody.velocity = new Vector3(0, _rigidbody.velocity.y);
+            else
+            {
+                _inputDir = _playerInput * (movementSpeed * Time.deltaTime);
+                _forceDir = (_twitchForceModifier.normalized + _outwardForceModifier.normalized) * (movementSpeed * 0.7f * Time.deltaTime);
+                Vector3 movementDir = _inputDir + _forceDir;
+                movementDir.y = _rigidbody.velocity.y;
+                _rigidbody.velocity = movementDir;
+            }
         }
 
         private void ApplyRotation()
@@ -113,13 +119,15 @@ namespace MyPlayer.Movement
             if (!wasGrounded && _isGrounded) Landed();
         }
 
-        private bool CanMove()
+        private void CheckCanMove()
         {
             if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-                playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Running")) return true;
-            return false;
+                playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Running")) _canMove = true;
+            else _canMove =  false;
         }
 
+        public void SetCanMove(bool val) => _canMove = val;
+        
         private void Landed()
         {
             playerAnimator.SetTrigger(Landed1);
@@ -128,6 +136,11 @@ namespace MyPlayer.Movement
         private void HandleAnimation()
         {
             playerAnimator.SetFloat(MoveSpeed, _inputDir.magnitude);
+        }
+
+        public void SetTrigger(string param)
+        {
+            playerAnimator.SetTrigger(param);
         }
     }
 }

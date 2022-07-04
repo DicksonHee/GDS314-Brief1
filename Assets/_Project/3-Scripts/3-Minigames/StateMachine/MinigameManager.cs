@@ -45,6 +45,10 @@ namespace PA.MinigameManager
         {
         }
 
+        public virtual void KillPlayer()
+        {
+        }
+        
         public void StartProtocol()
         {
             StartCoroutine(MinigameProtocol_CO());
