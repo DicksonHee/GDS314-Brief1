@@ -13,8 +13,11 @@ public class AxisLock : CinemachineExtension
         if (stage == CinemachineCore.Stage.Body)
         {
             var pos = state.RawPosition;
+            var rot = state.RawOrientation;
             pos.y = m_YPosition;
+            rot.y = 0;
             state.RawPosition = pos;
+            state.RawOrientation = rot;
         }
     }
 }

@@ -9,7 +9,8 @@ namespace PA.MinigameManager
 	{
 		private LavaScraper lavaScraper;
 		public Transform spawnPosition;
-
+		public string nextScene;
+		
 		protected override void Awake()
 		{
 			lavaScraper = (LavaScraper)scraper;
@@ -25,6 +26,7 @@ namespace PA.MinigameManager
 		protected override void PreGameState()
 		{
 			base.PreGameState();
+			PlayerMovement.current.SetCanMove(false);
 			PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
 			Debug.Log("Pre");
 		}
@@ -53,6 +55,20 @@ namespace PA.MinigameManager
 			base.EndGameState();
 		}
 
+		public void EndGame()
+		{
+			StopAllCoroutines();
+			PlayerMovement.current.movementSpeed = 0;
+			SceneLoad_Manager.LoadSpecificScene(nextScene);
+		}
+		
+		public override void KillPlayer()
+		{
+			PlayerMovement.current.SetTrigger("Fall");
+			PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
+			PlayerMovement.current.SetCanMove(false);
+		}
+
 		protected override IEnumerator MinigameProtocol_CO()
 		{
 			yield return new WaitForSeconds(_initialStartDelay);
@@ -64,5 +80,8 @@ namespace PA.MinigameManager
 
 			StartCoroutine(MinigameProtocol_CO());
 		}
+		
+		
+		public Vector2 GetForce() => lavaScraper.GetForce().normalized;
 	}
 }

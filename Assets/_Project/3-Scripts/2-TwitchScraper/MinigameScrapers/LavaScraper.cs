@@ -6,7 +6,9 @@ using Scraper;
 using UnityEngine;
 
 public class LavaScraper : MinigameScraper
-{  
+{
+    private Vector2 currentForce;
+    
     private void Awake()
     {
         _countList.Add("up", 0);
@@ -24,6 +26,7 @@ public class LavaScraper : MinigameScraper
         
         _pollList.Enqueue(message);
         AddMessage(message);
+        CalculateForce(out _, out _);
     }
 
     public override void GetMessageTest(string message)
@@ -34,7 +37,8 @@ public class LavaScraper : MinigameScraper
         }
         
         _pollList.Enqueue(message);
-        AddMessage(message);        
+        AddMessage(message);       
+        CalculateForce(out _, out _);
     }
 
     public void ApplyChatInputForce()
@@ -64,5 +68,8 @@ public class LavaScraper : MinigameScraper
         if (_pollList.Count <= 0) return;
         xForce = (float) _countList["right"] / _pollList.Count - (float) _countList["left"] / _pollList.Count;
         zForce = (float) _countList["up"] / _pollList.Count - (float) _countList["down"] / _pollList.Count;
+        currentForce = new Vector2(xForce, zForce);
     }
+    
+    public Vector2 GetForce() => currentForce;
 }

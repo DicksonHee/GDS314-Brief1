@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/5-Scenes/Minigames/FallingGame/FallingGame_1.unity
     guid: 7149728c6854dd94d98ccb2c4f73d34a
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/GridironDodge/Gridiron_1.unity
+    guid: 63874ccd4aef365469bc242db6aa4aff
   m_configObjects: {}
