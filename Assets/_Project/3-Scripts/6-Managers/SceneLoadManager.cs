@@ -57,7 +57,7 @@ public static class SceneLoad_Manager
         _scenesLoading.RemoveAt(0);
         
         // Fade the screen to black
-        LoadScreen.FadeIn(2f);
+        LoadScreen.current.FadeIn(2f);
         yield return new WaitForSeconds(2f);
         
         // Unload scenes in scenesToUnload
@@ -89,6 +89,6 @@ public static class SceneLoad_Manager
         }
         
         // Fade the screen to clear
-        LoadScreen.FadeOut(2f);
+        LoadScreen.current.FadeOut(2f);
     }
 }

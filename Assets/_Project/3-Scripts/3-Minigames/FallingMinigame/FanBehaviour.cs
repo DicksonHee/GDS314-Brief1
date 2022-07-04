@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using MyPlayer.Movement;
+using UnityEngine.SceneManagement;
 
 public class FanBehaviour : MonoBehaviour
 {
@@ -23,13 +25,15 @@ public class FanBehaviour : MonoBehaviour
         fanHead.transform.DORotate(new Vector3(0, fanArc, 0), fanSpeed).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).Play();
     }
 
-	private void Update()
+    private void Update()
 	{
-		CalculateForce();
+        CalculateForce();
 	}
 
 	private void CalculateForce()
     {
+        if (_player == null) return;
+        
         _forceOnPlayer = Vector3.zero;
         float distance = Vector3.Distance(fanHead.transform.position, _player.transform.position);
         if (distance < fanInfluenceRange)

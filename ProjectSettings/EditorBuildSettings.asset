@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/5-Scenes/LoadScene.unity
     guid: ca2cff6b0bc384944b22cc1ea03b2431
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/FallingGame/FallingGame_1.unity
+    guid: 7149728c6854dd94d98ccb2c4f73d34a
   m_configObjects: {}

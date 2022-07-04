@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 7472826480006643875}
   - component: {fileID: 7472826480006643876}
   - component: {fileID: 7472826480006643874}
+  - component: {fileID: 392365198274955326}
   m_Layer: 0
   m_Name: FallingMinigame_GM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7472826480006643875
 Transform:
   m_ObjectHideFlags: 0
@@ -45,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2df3dd4332fef8448dbb50beadc041f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scraper: {fileID: 0}
-  _initialStartDelay: 2
+  scraper: {fileID: 392365198274955326}
+  _initialStartDelay: 5
   _acceptingInputDuration: 2
   _notAcceptingInputDuration: 2
   spawnPosition: {fileID: 0}
@@ -62,3 +63,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 812c00a96af37fc44aff7ca0645650ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &392365198274955326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7472826480006643877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e770b14e3c47ff94aa6d7fc8d224d117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPollAmount: 200
+  showDebug: 0

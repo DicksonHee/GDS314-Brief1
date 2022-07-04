@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scraper;
+using Testing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +29,11 @@ public class StartMenu_UI : MonoBehaviour
 
     public void StartGame()
     {
-        SessionData.twitchChannelName = inputField.text;
+        SessionData.twitchChannelName = inputField.text.ToLower();
+        GameObject chatReader = new GameObject();
+        chatReader.AddComponent<ChatReader>();
+        chatReader.name = "ChatReader";
+        if(SessionData.twitchChannelName == "test") chatReader.AddComponent<RandomChatInputs>();
         SceneLoad_Manager.LoadSpecificScene(firstSceneName);
     }
 }

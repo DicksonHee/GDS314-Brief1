@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 2103313926}
   - component: {fileID: 2103313925}
   - component: {fileID: 2103313929}
+  - component: {fileID: 2103313930}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: LoadScreen
@@ -525,3 +526,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2103313930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103313924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a93308a44783f458bc79e6e4aa5ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 2103313929}
+  _loadScreenCamera: {fileID: 21274238}

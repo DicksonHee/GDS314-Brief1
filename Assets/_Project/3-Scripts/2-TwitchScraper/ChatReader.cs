@@ -16,13 +16,16 @@ namespace Scraper
         private const string URL = "irc.chat.twitch.tv";
         private const int Port = 6667;
 
+        public static ChatReader current;
         public static Action<string, string> OnMessageReceived;
-        
+
         public string channel = "disguisedtoast";
 
         private void Awake()
         {
+            current = this;
             ConnectToTwitch();
+            DontDestroyOnLoad(gameObject);
         }
 
         void Update()
@@ -49,6 +52,7 @@ namespace Scraper
             _reader = new StreamReader(_twitch.GetStream());
             _writer = new StreamWriter(_twitch.GetStream());
 
+            channel = SessionData.twitchChannelName;
             _writer.WriteLine("PASS " + "RandomPassword");
             _writer.WriteLine("NICK " + User);
             _writer.WriteLine("USER " + User + " 8 * :" + User);
@@ -78,6 +82,11 @@ namespace Scraper
                 
                 OnMessageReceived?.Invoke(author, chat);
             }
+        }
+
+        public void ProcessTestInput(string author, string message)
+        {
+            OnMessageReceived?.Invoke(author, message);
         }
     }
 }
