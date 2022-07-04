@@ -29,6 +29,10 @@ namespace MyPlayer.Movement
         public LayerMask groundLayer;
         public float movementSpeed = 5f;
 
+        public GameObject stepUpperDetector;
+        public GameObject stepLowerDetector;
+        public float stepSmoothAmount;
+
         public static Action<float, float> OnApplyForce;
         private static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
         private static readonly int Landed1 = Animator.StringToHash("Landed");
@@ -69,6 +73,7 @@ namespace MyPlayer.Movement
         {
             ApplyMovement();
             ApplyRotation();
+            CheckStep();
         }
 
         private void CheckInput()
@@ -126,6 +131,38 @@ namespace MyPlayer.Movement
             else _canMove =  false;
         }
 
+        private void CheckStep()
+        {
+            Vector3 position = _rigidbody.position;
+
+            if (Physics.Raycast(stepLowerDetector.transform.position, transform.TransformDirection(Vector3.forward), out _, 0.1f))
+            {
+                if (!Physics.Raycast(stepUpperDetector.transform.position, transform.TransformDirection(Vector3.forward), out _, 0.2f))
+                {
+                    position += new Vector3(position.x, stepSmoothAmount, position.z);
+                    _rigidbody.position = position;
+                }
+            }
+
+            if (Physics.Raycast(stepLowerDetector.transform.position, transform.TransformDirection(1.5f,0f,1f), out _, 0.1f))
+            {
+                if (!Physics.Raycast(stepUpperDetector.transform.position, transform.TransformDirection(1.5f,0f,1f), out _, 0.2f))
+                {
+                    position += new Vector3(position.x, stepSmoothAmount, position.z);
+                    _rigidbody.position = position;
+                }
+            }
+            
+            if (Physics.Raycast(stepLowerDetector.transform.position, transform.TransformDirection(-1.5f,0f,1f), out _, 0.1f))
+            {
+                if (!Physics.Raycast(stepUpperDetector.transform.position, transform.TransformDirection(-1.5f,0f,1f), out _, 0.2f))
+                {
+                    position += new Vector3(position.x, stepSmoothAmount, position.z);
+                    _rigidbody.position = position;
+                }
+            }
+        }
+        
         public void SetCanMove(bool val) => _canMove = val;
         
         private void Landed()
