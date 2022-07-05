@@ -15,7 +15,7 @@ namespace PA.MinigameManager
 		{
 			lavaScraper = (LavaScraper)scraper;
 			PreGameState();
-			StartCoroutine(MinigameProtocol_CO());
+			Invoke(nameof(StartProtocol), _initialStartDelay);
 		}
 
 		protected override void Update()
@@ -71,7 +71,6 @@ namespace PA.MinigameManager
 
 		protected override IEnumerator MinigameProtocol_CO()
 		{
-			yield return new WaitForSeconds(_initialStartDelay);
 			AcceptingInputsState();
 			yield return new WaitForSeconds(_acceptingInputDuration);
 			RunningInputsState();

@@ -10,23 +10,12 @@ public class ChairAssignment : MonoBehaviour
     public GameObject chair;
     public ChairScraper scraper;
 
-	private void Start()
-	{
-        InvokeRepeating(nameof(TurnStart), 1f, 5f);
-	}
-
-	private void TurnStart()
-    {
-        ShowLanes();
-        Invoke(nameof(ConfirmLanes), 2f);
-    }
-
-    private void ConfirmLanes()
+    public void ConfirmLanes()
     {
         ConfirmSpawn(scraper.CalculateHighest(2));
     }
 
-	private void ShowLanes()
+	public void ShowLanes()
     {
         for (int ii = 0; ii < laneGroups.Count; ii++)
         {
@@ -66,7 +55,7 @@ public class LaneGroup
         _spawnedObjects.Clear();
         for (int ii = 0; ii < spawnPositions.Count; ii++)
         {
-            if (spawnList[ii] == true)
+            if (spawnList[ii])
             {
                 _spawnedObjects.Add(UnityEngine.Object.Instantiate(spawnObject, spawnPositions[ii]));
             }
@@ -84,7 +73,7 @@ public class LaneGroup
     // Add numberOfChairs to spawn to spawnList
     private void AddChairs()
     {
-        int numberOfChairs = spawnPositions.Count - 1;// Random.Range(1, group.spawnPositions.Count - 1);
+        int numberOfChairs = Random.Range(1, spawnPositions.Count);
 
         spawnList.Clear();
         for (int ii = 0; ii < spawnPositions.Count; ii++)
