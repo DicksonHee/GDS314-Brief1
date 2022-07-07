@@ -54,7 +54,7 @@ public static class SceneLoad_Manager
         {
             yield return null;
         }
-        _scenesLoading.RemoveAt(0);
+        if(_scenesLoading.Count > 0) _scenesLoading.RemoveAt(0);
         
         // Fade the screen to black
         LoadScreen.current.FadeIn(2f);

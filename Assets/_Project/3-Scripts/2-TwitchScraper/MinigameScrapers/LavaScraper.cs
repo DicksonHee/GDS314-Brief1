@@ -17,6 +17,14 @@ public class LavaScraper : MinigameScraper
         _countList.Add("right", 0);
     }
 
+    public void ClearList()
+    {
+        for (int ii = 0; ii < _pollList.Count; ii++)
+        {
+            RemoveMessage(_pollList.Dequeue());
+        }
+    }
+
     public void ApplyChatInputForce()
     {
         CalculateForce(out float xForce, out float zForce);

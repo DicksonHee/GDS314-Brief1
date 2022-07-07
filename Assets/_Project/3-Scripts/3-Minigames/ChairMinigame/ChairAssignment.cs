@@ -12,7 +12,7 @@ public class ChairAssignment : MonoBehaviour
 
     public void ConfirmLanes()
     {
-        ConfirmSpawn(scraper.CalculateHighest(2));
+        ConfirmSpawn(scraper.CalculateHighest(1));
     }
 
 	public void ShowLanes()
@@ -32,8 +32,8 @@ public class ChairAssignment : MonoBehaviour
                 if (group.direction == dir)
                 {
                     group.ConfirmSpawn();
-                    break;
                 }
+                else group.DeleteSpawn();
             }
         }
 	}
@@ -68,6 +68,15 @@ public class LaneGroup
         {
             gameObject.GetComponent<ChairObject>().SpawnConfirmed(direction);
         }
+    }
+
+    public void DeleteSpawn()
+    {
+        foreach (GameObject gameObject in _spawnedObjects)
+		{
+            gameObject.GetComponent<ChairObject>().SpawnCancelled();
+		}
+
     }
 
     // Add numberOfChairs to spawn to spawnList

@@ -10,6 +10,8 @@ namespace PA.MinigameManager
     {
         [SerializeField] protected MinigameScraper scraper;
 
+        public static MinigameManager current;
+
         public float _initialStartDelay = 2f;
         public float _acceptingInputDuration = 2f;
         public float _notAcceptingInputDuration = 2f;
@@ -20,6 +22,7 @@ namespace PA.MinigameManager
 
         protected virtual void Awake()
         {
+            current = this;
         }
 
         protected virtual void Update()

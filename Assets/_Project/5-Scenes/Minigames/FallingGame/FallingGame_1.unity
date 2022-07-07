@@ -213,6 +213,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan_1
       objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012771571232187728, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1817,6 +1822,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan_8
       objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012771571232187728, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3265,6 +3275,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan_7
       objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012771571232187728, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4238,6 +4253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fan_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4012771571232187728, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
@@ -7000,6 +7020,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan_6
       objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4012771571232187728, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7451,6 +7476,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fan_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4013124261378960150, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
@@ -9844,6 +9874,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fan_4
       objectReference: {fileID: 0}
+    - target: {fileID: 4010015977802175584, guid: 509fb918891dec94f81a8dec3fa4baf3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4013124261378960150, guid: 509fb918891dec94f81a8dec3fa4baf3,
         type: 3}
       propertyPath: m_RootOrder
@@ -10372,6 +10407,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105336324765661939, guid: 93f90cbcb0c5bc44d89158625abf8af8,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105336324765661939, guid: 93f90cbcb0c5bc44d89158625abf8af8,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105336324765661939, guid: 93f90cbcb0c5bc44d89158625abf8af8,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105336324765661939, guid: 93f90cbcb0c5bc44d89158625abf8af8,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3105336324915409446, guid: 93f90cbcb0c5bc44d89158625abf8af8,
         type: 3}

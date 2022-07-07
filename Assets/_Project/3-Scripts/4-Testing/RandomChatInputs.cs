@@ -10,7 +10,7 @@ namespace  Testing
 {
     public class RandomChatInputs : MonoBehaviour
     {
-        public List<string> inputs = new() {"up", "down", "left", "right"};
+        public List<string> inputs = new() {"up", "down", "left", "right", "cw", "ccw"};
         private int lowRange;
         private int highRange;
         
