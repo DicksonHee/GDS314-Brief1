@@ -1,3 +1,4 @@
+using PA.MinigameManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +9,6 @@ public class ChairObject : MonoBehaviour
 {
 	public float chairSpeed = 5f;
 
-	private void Awake()
-	{
-		StartCoroutine(DestroyObject(4f));
-	}
-
 	private IEnumerator DestroyObject(float duration)
 	{
 		yield return new WaitForSeconds(duration);
@@ -21,6 +17,8 @@ public class ChairObject : MonoBehaviour
 
 	public void SpawnConfirmed(LaneDirections direction)
 	{
+		StopAllCoroutines();
+
 		switch (direction)
 		{
 			case LaneDirections.N:
@@ -36,13 +34,31 @@ public class ChairObject : MonoBehaviour
 				MoveChair(new Vector3(1f, 0, 0));
 				break;
 		}
-
-		StopAllCoroutines();
+	
 		StartCoroutine(DestroyObject(4f));
+	}
+
+	public void SpawnCancelled()
+	{
+		Destroy(gameObject);
+	}
+
+	private IEnumerator MoveChair_CO(Vector3 moveDir)
+	{
+		yield return new WaitForSeconds(1);
+		GetComponent<Rigidbody>().AddForce(moveDir * chairSpeed, ForceMode.Impulse);
 	}
 
 	private void MoveChair(Vector3 moveDir)
 	{
-		GetComponent<Rigidbody>().AddForce(moveDir * chairSpeed, ForceMode.Impulse);
+		StartCoroutine(MoveChair_CO(moveDir));
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			MinigameManager.current.KillPlayer();
+		}
 	}
 }
