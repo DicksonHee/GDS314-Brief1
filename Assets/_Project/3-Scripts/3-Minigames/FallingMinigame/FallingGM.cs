@@ -46,6 +46,7 @@ namespace PA.MinigameManager
 		protected override void NotAcceptingInputsState()
 		{
 			base.NotAcceptingInputsState();
+			lavaScraper.ClearList();
 			Debug.Log("NotAccept");
 		}
 

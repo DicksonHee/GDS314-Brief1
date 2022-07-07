@@ -63,7 +63,7 @@ public class ChairGM : MinigameManager
 
     public override void KillPlayer()
     {
-        base.KillPlayer();
+        EndGameState();
     }
 
     private void StartTimer()
