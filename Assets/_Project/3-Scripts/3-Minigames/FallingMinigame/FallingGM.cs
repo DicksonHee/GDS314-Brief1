@@ -9,8 +9,7 @@ namespace PA.MinigameManager
 	{
 		private LavaScraper lavaScraper;
 		public Transform spawnPosition;
-		public string nextScene;
-		
+
 		protected override void Awake()
 		{
 			lavaScraper = (LavaScraper)scraper;
@@ -55,7 +54,7 @@ namespace PA.MinigameManager
 			base.EndGameState();
 		}
 
-		public void EndGame()
+		public override void EndGame()
 		{
 			StopAllCoroutines();
 			PlayerMovement.current.movementSpeed = 0;

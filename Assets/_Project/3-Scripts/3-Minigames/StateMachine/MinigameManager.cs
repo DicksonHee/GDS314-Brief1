@@ -13,7 +13,8 @@ namespace PA.MinigameManager
         public float _initialStartDelay = 2f;
         public float _acceptingInputDuration = 2f;
         public float _notAcceptingInputDuration = 2f;
-
+        public string nextScene;
+        
         public event Action OnTimerStart;
         public event Action OnTimerStop;
 
@@ -45,6 +46,10 @@ namespace PA.MinigameManager
         {
         }
 
+        public virtual void EndGame()
+        {
+        }
+        
         public virtual void KillPlayer()
         {
         }

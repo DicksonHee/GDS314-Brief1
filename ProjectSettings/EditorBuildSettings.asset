@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/5-Scenes/Minigames/GridironDodge/Gridiron_1.unity
     guid: 63874ccd4aef365469bc242db6aa4aff
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/CircularMaze/CircularMazeSimple_1.unity
+    guid: 6732d79ffa3c36d44b87569556905bdd
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/CircularMaze/CircularMaze_1.unity
+    guid: fe445813c4174b340a31ca2e523575fe
   m_configObjects: {}

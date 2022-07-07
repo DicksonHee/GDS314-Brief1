@@ -90,7 +90,8 @@ namespace MyPlayer.Movement
             else
             {
                 _inputDir = _playerInput * (movementSpeed * Time.deltaTime);
-                _forceDir = (_twitchForceModifier.normalized + _outwardForceModifier.normalized) * (movementSpeed * 0.7f * Time.deltaTime);
+                _forceDir = Vector3.ClampMagnitude(_twitchForceModifier.normalized + _outwardForceModifier.normalized, 1) * (movementSpeed * 0.8f * Time.deltaTime);
+
                 Vector3 movementDir = _inputDir + _forceDir;
                 movementDir.y = _rigidbody.velocity.y;
                 _rigidbody.velocity = movementDir;

@@ -14,42 +14,6 @@ public class ChairScraper : MinigameScraper
         _countList.Add("right", 0);
     }
 
-    protected override void GetMessage(string author, string message)
-    {
-        if (_pollList.Count >= maxPollAmount)
-        {
-            RemoveMessage(_pollList.Dequeue());
-        }
-
-        _pollList.Enqueue(message);
-        AddMessage(message);
-    }
-
-    public override void GetMessageTest(string message)
-    {
-        if (_pollList.Count >= maxPollAmount)
-        {
-            RemoveMessage(_pollList.Dequeue());
-        }
-
-        _pollList.Enqueue(message);
-        AddMessage(message);
-    }
-
-    private void AddMessage(string message)
-    {
-        _countList[message]++;
-
-        DebugMessage(_countList);
-    }
-
-    private void RemoveMessage(string message)
-    {
-        _countList[message]--;
-
-        DebugMessage(_countList);
-    }
-
     public List<LaneDirections> CalculateHighest(int laneAmount)
     {
         var _sortedDict = from entry in _countList orderby entry.Value descending select entry;
@@ -88,8 +52,6 @@ public class ChairScraper : MinigameScraper
             debugMessage += item.Key + ": " + item.Value;
         }
 
-
-        Debug.Log(debugMessage);
         return sortedDirections;
     }
 }

@@ -9,7 +9,7 @@ namespace Scraper
     {
         public int maxPollAmount = 100;
         public bool showDebug;
-
+        
         protected readonly Queue<string> _pollList = new();
         protected readonly Dictionary<string, int> _countList = new();
 
@@ -23,15 +23,46 @@ namespace Scraper
             ChatReader.OnMessageReceived -= GetMessage;
         }
 
-        protected virtual void GetMessage(string author, string message)
+        public virtual void GetMessage(string author, string message)
         {
+            if (!_countList.ContainsKey(message)) return;
             
+            if (_pollList.Count >= maxPollAmount)
+            {
+                RemoveMessage(_pollList.Dequeue());
+            }
+
+            _pollList.Enqueue(message);
+            AddMessage(message);
         }
 
         public virtual void GetMessageTest(string message)
         {
+            if (!_countList.ContainsKey(message)) return;
             
+            if (_pollList.Count >= maxPollAmount)
+            {
+                RemoveMessage(_pollList.Dequeue());
+            }
+
+            _pollList.Enqueue(message);
+            AddMessage(message);
         }
+        
+        protected void AddMessage(string message)
+        {
+            _countList[message]++;
+
+            DebugMessage(_countList);
+        }
+
+        protected void RemoveMessage(string message)
+        {
+            _countList[message]--;
+
+            DebugMessage(_countList);
+        }
+        
         protected void DebugMessage(string debugMessage)
         {
             if (!showDebug) return;

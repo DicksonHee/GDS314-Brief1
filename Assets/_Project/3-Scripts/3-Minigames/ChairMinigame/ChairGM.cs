@@ -8,7 +8,6 @@ using UnityEngine;
 public class ChairGM : MinigameManager
 {
     public int maxTime;
-    public string nextScene;
     public TMP_Text text;
     
     private ChairAssignment chairAssignment;

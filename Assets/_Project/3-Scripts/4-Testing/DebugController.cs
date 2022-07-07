@@ -50,7 +50,7 @@ namespace Testing
             for (int ii = 0; ii < inputAmount; ii++)
             {
                 string randString = stringInputs[Random.Range(0, stringInputs.Count)];
-                Scraper.GetMessageTest(randString);
+                Scraper.GetMessage("",randString);
             }
         }
     }

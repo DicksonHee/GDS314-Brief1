@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class EndTrigger : MonoBehaviour
 {
-    public FallingGM FallingGm;
+    public MinigameManager minigameManager;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            FallingGm.EndGame();
+            minigameManager.EndGame();
         }
     }
 }
