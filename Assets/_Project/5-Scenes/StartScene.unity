@@ -1532,7 +1532,7 @@ MonoBehaviour:
   startPanel: {fileID: 809076859}
   optionsPanel: {fileID: 187018324}
   inputField: {fileID: 821189335}
-  firstSceneName: FallingGame_1
+  firstSceneName: Gridiron_2
 --- !u!1 &809076859
 GameObject:
   m_ObjectHideFlags: 0

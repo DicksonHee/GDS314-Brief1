@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/5-Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/_Project/5-Scenes/TestScenes/Dickson_TestScene.unity
-    guid: 9bd7b83c3d85a0f429e5d1f6becda108
-  - enabled: 1
     path: Assets/_Project/5-Scenes/StartScene.unity
     guid: 0e9a33c592ea29844abfd2937c397cc9
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/TestScenes/Dickson_TestScene.unity
+    guid: 9bd7b83c3d85a0f429e5d1f6becda108
   - enabled: 1
     path: Assets/_Project/5-Scenes/LoadScene.unity
     guid: ca2cff6b0bc384944b22cc1ea03b2431
@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/5-Scenes/Minigames/GridironDodge/Gridiron_1.unity
     guid: 63874ccd4aef365469bc242db6aa4aff
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/GridironDodge/Gridiron_2.unity
+    guid: 128e8ad406e68ff40a987d582d2adc28
   - enabled: 1
     path: Assets/_Project/5-Scenes/Minigames/CircularMaze/CircularMazeSimple_1.unity
     guid: 6732d79ffa3c36d44b87569556905bdd

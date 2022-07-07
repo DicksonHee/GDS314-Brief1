@@ -12,6 +12,15 @@ public class StaticTVShader : MonoBehaviour
 	public float maxStaticVal;
 	public float minStaticVal;
 
+	public int leftScreen;
+	public int midScreen;
+	public int rightScreen;
+
+	public AnimationCurve staticOnCurve;
+	public AnimationCurve staticOffCurve;
+
+	private bool isStaticOn;
+
 	private void Awake()
 	{
 		shaderRenderer = GetComponent<Renderer>();
@@ -19,43 +28,49 @@ public class StaticTVShader : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1))
+		if (Input.GetKeyDown(KeyCode.Alpha1) && !isStaticOn)
 		{
 			StaticOn();
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
+		if (Input.GetKeyDown(KeyCode.Alpha2) && isStaticOn)
 		{
 			StaticOff();
 		}
+
+		if (isStaticOn)
+			shaderRenderer.sharedMaterials[midScreen].SetFloat("_yScroll", shaderRenderer.sharedMaterials[midScreen].GetFloat("_yScroll") + 1 * Time.deltaTime);
 	}
 
 	public void StaticOn() => StartCoroutine(StaticOn_CO());
 	public void StaticOff() => StartCoroutine(StaticOff_CO());
 
-	private IEnumerator StaticOn_CO()
-	{
-		float startTime = Time.time;
-		float startYVal = shaderRenderer.sharedMaterial.GetFloat("yScroll");
-		float startIntensity = shaderRenderer.sharedMaterial.GetFloat("Intensity");
-
-		while (Time.time < startTime + duration)
-		{
-			shaderRenderer.sharedMaterial.SetFloat("yScroll", Mathf.Lerp(startYVal, minYVal, (Time.time - startTime) / duration));
-			shaderRenderer.sharedMaterial.SetFloat("Intensity", Mathf.Lerp(startIntensity, minStaticVal, (Time.time - startTime) / duration));
-			yield return null;
-		}
-	}
-
 	private IEnumerator StaticOff_CO()
 	{
+		isStaticOn = false;
 		float startTime = Time.time;
-		float startYVal = shaderRenderer.sharedMaterial.GetFloat("yScroll");
-		float startIntensity = shaderRenderer.sharedMaterial.GetFloat("Intensity");
 
 		while (Time.time < startTime + duration)
 		{
-			shaderRenderer.sharedMaterial.SetFloat("yScroll", Mathf.Lerp(startYVal, maxYVal, (Time.time - startTime) / duration));
-			shaderRenderer.sharedMaterial.SetFloat("Intensity", Mathf.Lerp(startIntensity, maxStaticVal, (Time.time - startTime) / duration));
+			shaderRenderer.sharedMaterials[midScreen].SetFloat("_yScroll", staticOffCurve.Evaluate((Time.time - startTime) / duration) * maxYVal);
+			shaderRenderer.sharedMaterials[midScreen].SetFloat("_Intensity", staticOffCurve.Evaluate((Time.time - startTime) / duration) * maxStaticVal);
+			yield return null;
+		}
+
+		shaderRenderer.sharedMaterials[midScreen].SetFloat("_yScroll", minYVal);
+		shaderRenderer.sharedMaterials[midScreen].SetFloat("_Intensity", minStaticVal);
+	}
+
+	private IEnumerator StaticOn_CO()
+	{
+		isStaticOn = true;
+		float startTime = Time.time;
+		float startYVal = shaderRenderer.sharedMaterials[midScreen].GetFloat("_yScroll");
+		float startIntensity = shaderRenderer.sharedMaterials[midScreen].GetFloat("_Intensity");
+
+		while (Time.time < startTime + duration)
+		{
+			shaderRenderer.sharedMaterials[midScreen].SetFloat("_yScroll", staticOnCurve.Evaluate((Time.time - startTime) / duration) * maxYVal);
+			shaderRenderer.sharedMaterials[midScreen].SetFloat("_Intensity", staticOnCurve.Evaluate((Time.time - startTime) / duration) * maxStaticVal);
 			yield return null;
 		}
 	}

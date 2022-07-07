@@ -55,16 +55,16 @@ namespace Testing
         }
     }
     
-    [CustomEditor(typeof(DebugController))]
-    public class DebugEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
+    //[CustomEditor(typeof(DebugController))]
+    //public class DebugEditor : Editor
+    //{
+    //    public override void OnInspectorGUI()
+    //    {
+    //        base.OnInspectorGUI();
 
-            DebugController controller = (DebugController)target;
-            if(GUILayout.Button("RandomInputs")) controller.RandomInputs();
-        }
-    }
+    //        DebugController controller = (DebugController)target;
+    //        if(GUILayout.Button("RandomInputs")) controller.RandomInputs();
+    //    }
+    //}
 }
 

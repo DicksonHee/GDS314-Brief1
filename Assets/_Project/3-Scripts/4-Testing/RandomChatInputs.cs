@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using Scraper;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace  Testing
 {
     public class RandomChatInputs : MonoBehaviour
     {
-        public List<string> inputs = new() {"up", "down", "left", "right", "cw", "ccw"};
+        public List<string> inputs = new() {"up", "down", "left", "right"};
         private int lowRange;
         private int highRange;
         
@@ -26,6 +27,9 @@ namespace  Testing
 
         private void Awake()
         {
+            if (SceneManager.GetSceneByName("CircularMaze_1") != null) inputs = new() { "cw" };
+            else inputs = new() { "up", "down", "left", "right" };
+
             lowRange = 0;
             highRange = inputs.Count;
             StartCoroutine(UpdateRanges());

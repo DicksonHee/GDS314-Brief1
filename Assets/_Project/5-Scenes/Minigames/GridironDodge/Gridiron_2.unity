@@ -5444,5 +5444,10 @@ PrefabInstance:
       propertyPath: nextScene
       value: CircularMaze_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2846324563475310775, guid: 1a7623506a2072f43b7a24f5ec14c131,
+        type: 3}
+      propertyPath: _notAcceptingInputDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a7623506a2072f43b7a24f5ec14c131, type: 3}

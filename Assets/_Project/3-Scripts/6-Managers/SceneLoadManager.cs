@@ -30,8 +30,12 @@ public static class SceneLoad_Manager
         List<string> scenesToUnload = new List<string>();
         
         scenesToLoad.Add(sceneName);
-        scenesToUnload.Add(SceneManager.GetActiveScene().name);
-        if(SceneManager.GetSceneByName("PlayerScene").isLoaded) scenesToUnload.Add("PlayerScene");
+
+        foreach (Scene scene in SceneManager.GetAllScenes())
+        {
+            if (scene.name == "LoadScene") continue;
+            else scenesToUnload.Add(scene.name);
+        }
         
         _staticMb.StartCoroutine(ScenesLoading(scenesToLoad, scenesToUnload));
     }
