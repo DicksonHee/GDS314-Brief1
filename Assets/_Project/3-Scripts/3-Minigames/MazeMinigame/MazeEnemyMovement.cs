@@ -17,6 +17,5 @@ public class MazeEnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Animator.SetFloat
     }
 }
