@@ -10,8 +10,8 @@ namespace Scraper
         public int maxPollAmount = 100;
         public bool showDebug;
         
-        protected readonly Queue<string> _pollList = new();
-        protected readonly Dictionary<string, int> _countList = new();
+        protected readonly Queue<string> _pollList = new(); // List of incoming inputs
+        protected readonly Dictionary<string, int> _countList = new(); // Dictionary of sorted inputs
 
         private void OnEnable()
         {
@@ -52,15 +52,13 @@ namespace Scraper
         protected void AddMessage(string message)
         {
             _countList[message]++;
-
-            DebugMessage(_countList);
+            ChatInputVisualiser.current.AcceptInput(message);
         }
 
         protected void RemoveMessage(string message)
         {
             _countList[message]--;
-
-            DebugMessage(_countList);
+            ChatInputVisualiser.current.RemoveInput(message);
         }
         
         protected void DebugMessage(string debugMessage)
