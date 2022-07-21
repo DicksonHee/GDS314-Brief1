@@ -17,6 +17,7 @@ public class LavaScraper : MinigameScraper
         _countList.Add("right", 0);
     }
 
+    // specific controls and how the chat interacts with it per level with this script being one level
     public void ClearList()
     {
         for (int ii = 0; ii < _pollList.Count; ii++)

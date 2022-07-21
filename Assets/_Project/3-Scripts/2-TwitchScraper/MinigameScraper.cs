@@ -7,6 +7,8 @@ namespace Scraper
 {
     public class MinigameScraper : MonoBehaviour
     {
+        // place to grab certain repeatable codes
+
         public int maxPollAmount = 100;
         public bool showDebug;
         
