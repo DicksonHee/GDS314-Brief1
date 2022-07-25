@@ -14,17 +14,8 @@ public class DeathrunPressureTrap : MonoBehaviour
     // making checkpoints to identify which trap the player is on
     // trap activates in chat and then does next voting period after a delay
 
-    
 
-    void VoteUseTrap()
-    {
-        if (currentVote <= majorityVote)
-        {
-            ActivateTrap();
-        }
-    }
-
-    void ActivateTrap()
+    public void ActivateTrap()
     {
         // if player is in zone, then player dead
         if ()
