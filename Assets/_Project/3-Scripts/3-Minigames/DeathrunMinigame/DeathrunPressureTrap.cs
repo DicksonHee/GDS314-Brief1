@@ -10,7 +10,7 @@ public class DeathrunPressureTrap : MonoBehaviour
     {
         if (other.gameObject.name == "player")
         {
-            
+            // get player script and activate kill function
         }
     }
 
