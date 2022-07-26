@@ -34,7 +34,7 @@ public class DeathRunScrapper : MinigameScraper
         voteHold = _countList["hold"];
 
 
-        if ()// not finished, needs calculation for proper working function
+        if ((voteHold / 100) + (voteNow / 100) <= voteNow)// not finished, needs calculation for proper working function
         {
 
         }
