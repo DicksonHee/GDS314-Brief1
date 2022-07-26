@@ -9,6 +9,7 @@ public class DeathRunScrapper : MinigameScraper
     private bool majorityReached;
     private float voteHold;
     private float voteNow;
+    private float temp;
 
     private void Awake()
     {
@@ -33,12 +34,13 @@ public class DeathRunScrapper : MinigameScraper
         voteNow = _countList["now"];
         voteHold = _countList["hold"];
 
+        temp = voteNow / (voteHold + voteHold);
 
-        if ((voteHold / 100) + (voteNow / 100) <= voteNow)// not finished, needs calculation for proper working function
+        if (temp <= 0.7)
         {
-
+            ActivateTrap();
         }
 
     }
-
+    
 }
