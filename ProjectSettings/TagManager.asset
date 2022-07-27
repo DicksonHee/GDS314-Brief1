@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LoadScreen
   - LoadScreenCamera
+  - Key
   layers:
   - Default
   - TransparentFX
