@@ -11,6 +11,8 @@ public class DeathRunScrapper : MinigameScraper
     private float voteNow;
     private float temp;
 
+    public DeathrunPressureTrap currentTrap;
+
     private void Awake()
     {
         _countList.Add("now", 0);
@@ -38,7 +40,7 @@ public class DeathRunScrapper : MinigameScraper
 
         if (temp <= 0.7)
         {
-            ActivateTrap();
+            currentTrap.ActivateTrap();
         }
 
     }
