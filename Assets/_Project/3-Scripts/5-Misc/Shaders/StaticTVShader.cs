@@ -20,29 +20,57 @@ public class StaticTVShader : MonoBehaviour
 	public AnimationCurve staticOffCurve;
 
 	private bool isStaticOn;
+	private Dictionary<int, bool> staticOnScreens;
 
 	private void Awake()
 	{
 		shaderRenderer = GetComponent<Renderer>();
+		staticOnScreens = new();
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Alpha1) && !isStaticOn)
+		foreach (var screen in staticOnScreens)
 		{
-			StaticOn();
+			if(screen.Value) shaderRenderer.sharedMaterials[screen.Key].SetFloat("_yScroll", shaderRenderer.sharedMaterials[midScreen].GetFloat("_yScroll") + 1 * Time.deltaTime);
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2) && isStaticOn)
-		{
-			StaticOff();
-		}
-
-		if (isStaticOn)
-			shaderRenderer.sharedMaterials[midScreen].SetFloat("_yScroll", shaderRenderer.sharedMaterials[midScreen].GetFloat("_yScroll") + 1 * Time.deltaTime);
+		
 	}
 
-	public void StaticOn() => StartCoroutine(StaticOn_CO());
-	public void StaticOff() => StartCoroutine(StaticOff_CO());
+	public void StaticOn(StaticScreenPos pos)
+	{
+		switch (pos)
+		{
+			case StaticScreenPos.Left:
+				staticOnScreens[leftScreen] = true;
+				break;
+			case StaticScreenPos.Right:
+				staticOnScreens[rightScreen] = true;
+				break;
+			case StaticScreenPos.Mid:
+				staticOnScreens[midScreen] = true;
+				break;
+		}
+
+		StartCoroutine(StaticOn_CO());
+	}
+	public void StaticOff(StaticScreenPos pos)
+	{
+		switch (pos)
+		{
+			case StaticScreenPos.Left:
+				staticOnScreens[leftScreen] = false;
+				break;
+			case StaticScreenPos.Right:
+				staticOnScreens[rightScreen] = false;
+				break;
+			case StaticScreenPos.Mid:
+				staticOnScreens[midScreen] = false;
+				break;
+		}
+
+		StartCoroutine(StaticOff_CO());
+	}
 
 	private IEnumerator StaticOff_CO()
 	{
@@ -64,8 +92,6 @@ public class StaticTVShader : MonoBehaviour
 	{
 		isStaticOn = true;
 		float startTime = Time.time;
-		float startYVal = shaderRenderer.sharedMaterials[midScreen].GetFloat("_yScroll");
-		float startIntensity = shaderRenderer.sharedMaterials[midScreen].GetFloat("_Intensity");
 
 		while (Time.time < startTime + duration)
 		{
@@ -74,4 +100,31 @@ public class StaticTVShader : MonoBehaviour
 			yield return null;
 		}
 	}
+
+	private void OnApplicationQuit()
+	{
+		shaderRenderer.sharedMaterials[0].SetFloat("_yScroll", 0);
+		shaderRenderer.sharedMaterials[0].SetFloat("_Intensity", 0);
+		shaderRenderer.sharedMaterials[1].SetFloat("_yScroll", 0);
+		shaderRenderer.sharedMaterials[1].SetFloat("_Intensity", 0);
+		shaderRenderer.sharedMaterials[2].SetFloat("_yScroll", 0);
+		shaderRenderer.sharedMaterials[2].SetFloat("_Intensity", 0);
+	}
+
+	private void OnDisable()
+	{
+		shaderRenderer.sharedMaterials[0].SetFloat("_yScroll", 0);
+		shaderRenderer.sharedMaterials[0].SetFloat("_Intensity", 0);
+		shaderRenderer.sharedMaterials[1].SetFloat("_yScroll", 0);
+		shaderRenderer.sharedMaterials[1].SetFloat("_Intensity", 0);
+		shaderRenderer.sharedMaterials[2].SetFloat("_yScroll", 0);
+		shaderRenderer.sharedMaterials[2].SetFloat("_Intensity", 0);
+	}
+}
+
+public enum StaticScreenPos
+{
+	Left,
+	Right,
+	Mid
 }

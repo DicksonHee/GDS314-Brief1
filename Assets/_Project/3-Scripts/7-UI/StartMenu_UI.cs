@@ -9,23 +9,50 @@ using UnityEngine.UI;
 
 public class StartMenu_UI : MonoBehaviour
 {
-    public GameObject startPanel;
-    public GameObject optionsPanel;
+    public StaticTVShader _staticShader;
+    public Animator _cameraAnimator;
+    public Animator _canvasAnimator;
 
     public TMP_InputField inputField;
     public string firstSceneName;
-    
-    private void Start()
+
+    public void OpenStartPanel()
     {
-        startPanel.SetActive(false);
-        optionsPanel.SetActive(false);
+        StartCoroutine(OpenStartPanel_CO());
+    }
+    public void CloseStartPanel()
+    {
+
+    }
+    public void OpenOptionsPanel()
+    {
+
+    }
+    public void CloseOptionsPanel()
+    {
+
+    }
+    public void OpenCreditsPanel()
+    {
+
     }
 
-    public void OpenStartPanel() => startPanel.SetActive(true);
-    public void CloseStartPanel() => startPanel.SetActive(false);
-    public void OpenOptionsPanel() => optionsPanel.SetActive(true);
-    public void CloseOptionsPanel() => optionsPanel.SetActive(false);
-    public void QuitGame() => Application.Quit();
+    public void CloseCreditsPanel()
+    {
+
+    }
+
+    public void QuitGame()
+    {
+
+    }
+
+    private IEnumerator OpenStartPanel_CO()
+    {
+        _canvasAnimator.SetTrigger("FadeMain");
+        yield return new WaitForSeconds(1f);
+        _staticShader.StaticOn(StaticScreenPos.Mid);
+    }
 
     public void StartGame()
     {
