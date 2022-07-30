@@ -45,7 +45,7 @@ namespace Scraper
                 ProcessMessage(message);
             }
         }
-
+         
         private void ConnectToTwitch()
         {
             _twitch = new TcpClient(URL, Port);
