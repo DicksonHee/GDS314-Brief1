@@ -40,7 +40,9 @@ public class DeathRunScrapper : MinigameScraper
 
         if (temp <= 0.7)
         {
+            ClearList();
             currentTrap.ActivateTrap();
+            
         }
 
     }
