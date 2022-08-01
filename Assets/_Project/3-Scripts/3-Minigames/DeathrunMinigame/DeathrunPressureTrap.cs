@@ -9,7 +9,6 @@ public class DeathrunPressureTrap : MonoBehaviour
     public GameObject[] triggerZone;
     public DeathRunGM deathRunGM;
     private int currentTrap;
-    public GameObject activeTrap;
     public GameObject activeTrigger;
 
     public void Awake()
