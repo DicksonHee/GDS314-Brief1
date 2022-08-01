@@ -36,9 +36,9 @@ public class DeathRunScrapper : MinigameScraper
         voteNow = _countList["now"];
         voteHold = _countList["hold"];
 
-        temp = voteNow / (voteHold + voteHold);
+        temp = voteNow / (voteNow + voteHold);
 
-        if (temp <= 0.7)
+        if (temp >= 0.7)
         {
             ClearList();
             currentTrap.ActivateTrap();

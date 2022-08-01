@@ -7,9 +7,11 @@ using UnityEngine;
 public class DeathRunGM : MinigameManager
 {
     public int maxTime;
+    private DeathRunScrapper dRScraper;
     protected override void Awake()
     {
         base.Awake();
+        dRScraper = (DeathRunScrapper)scraper;
         Invoke(nameof(StartProtocol), _initialStartDelay);
 
     }
@@ -41,11 +43,6 @@ public class DeathRunGM : MinigameManager
         base.NotAcceptingInputsState();
 
         if (maxTime == 0) EndGameState();
-    }
-
-    private void StartTimer()
-    {
-        
     }
 
     protected override void EndGameState()
