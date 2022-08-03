@@ -10,6 +10,7 @@ public class DeathrunPressureTrap : MonoBehaviour
     public DeathRunGM deathRunGM;
     private int currentTrap;
     public GameObject activeTrigger;
+    public DeathAnimation deathAnim;
 
     public void Awake()
     {
@@ -17,23 +18,14 @@ public class DeathrunPressureTrap : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Player")
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            
-            inTriggerZone = true;
-
+            ActivateTrap();
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            inTriggerZone = false;
-        }
-    }
 
     public void NextTrap()
     {
@@ -41,19 +33,20 @@ public class DeathrunPressureTrap : MonoBehaviour
         currentTrap++;
         activeTrigger = triggerZone[currentTrap];
         activeTrigger.SetActive(true);
-
+        Debug.Log("trap set");
     }
 
 
     public void ActivateTrap()
     {
 
-
+        Debug.Log("trap activated");
         if (inTriggerZone)
         {
-            deathRunGM.KillPlayer();
+            Debug.Log("killing player");
+            deathAnim.UponDeath();
             // connect to death script/function and activate it
-            
+
         }
         activeTrigger.SetActive(false);
         // play effects from each trap
