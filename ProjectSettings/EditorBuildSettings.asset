@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Project/5-Scenes/NewStartScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -21,15 +21,18 @@ EditorBuildSettings:
     path: Assets/_Project/5-Scenes/Minigames/FallingGame/FallingGame_1.unity
     guid: 7149728c6854dd94d98ccb2c4f73d34a
   - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/FallingGame/FallingGame_2.unity
+    guid: 99386a9810e0dd34cb0e2b0f09b47532
+  - enabled: 1
+    path: Assets/_Project/5-Scenes/Minigames/FallingGame/FallingGame_3.unity
+    guid: a8b05643f18763948a2bc02f0f7fb7dd
+  - enabled: 1
     path: Assets/_Project/5-Scenes/Minigames/GridironDodge/Gridiron_1.unity
     guid: 63874ccd4aef365469bc242db6aa4aff
   - enabled: 1
     path: Assets/_Project/5-Scenes/Minigames/GridironDodge/Gridiron_2.unity
     guid: 128e8ad406e68ff40a987d582d2adc28
   - enabled: 1
-    path: Assets/_Project/5-Scenes/Minigames/CircularMaze/CircularMazeSimple_1.unity
-    guid: 6732d79ffa3c36d44b87569556905bdd
-  - enabled: 1
-    path: Assets/_Project/5-Scenes/Minigames/CircularMaze/CircularMaze_1.unity
-    guid: fe445813c4174b340a31ca2e523575fe
+    path: Assets/_Project/5-Scenes/Minigames/Password/GhostChase_1.unity
+    guid: 6271fa4e648ee774aa8dcc3c3c573a08
   m_configObjects: {}

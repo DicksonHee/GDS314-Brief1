@@ -18,7 +18,7 @@ public class StartMenu_UI : MonoBehaviour
 
     public void OpenStartPanel()
     {
-        StartCoroutine(OpenStartPanel_CO());
+        _canvasAnimator.SetTrigger("FadeMain");
     }
     public void CloseStartPanel()
     {
@@ -47,11 +47,19 @@ public class StartMenu_UI : MonoBehaviour
 
     }
 
+    public void EnterPressed()
+    {
+        StartCoroutine(OpenStartPanel_CO());
+    }
+    
     private IEnumerator OpenStartPanel_CO()
     {
-        _canvasAnimator.SetTrigger("FadeMain");
-        yield return new WaitForSeconds(1f);
+        _canvasAnimator.SetTrigger("InputScreenFade");
         _staticShader.StaticOn(StaticScreenPos.Mid);
+        yield return new WaitForSeconds(2f);
+        _staticShader.StaticOff(StaticScreenPos.Mid);
+        yield return new WaitForSeconds(1f);
+        StartGame();
     }
 
     public void StartGame()
@@ -61,6 +69,6 @@ public class StartMenu_UI : MonoBehaviour
         chatReader.AddComponent<ChatReader>();
         chatReader.name = "ChatReader";
         if(SessionData.twitchChannelName == "test") chatReader.AddComponent<RandomChatInputs>();
-        SceneLoad_Manager.LoadSpecificScene(firstSceneName);
+        SceneLoad_Manager.LoadSpecificScene(SessionManager.current.GetNextRandomScene());
     }
 }
