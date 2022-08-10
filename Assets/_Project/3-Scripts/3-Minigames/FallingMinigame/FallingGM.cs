@@ -59,7 +59,7 @@ namespace PA.MinigameManager
 		{
 			StopAllCoroutines();
 			PlayerMovement.current.movementSpeed = 0;
-			SceneLoad_Manager.LoadSpecificScene(nextScene);
+			LoadElevatorScene();
 		}
 		
 		public override void KillPlayer()

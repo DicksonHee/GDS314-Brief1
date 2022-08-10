@@ -51,7 +51,7 @@ public class DeathRunGM : MinigameManager
 
         StopAllCoroutines();
         PlayerMovement.current.movementSpeed = 0;
-        SceneLoad_Manager.LoadSpecificScene(nextScene);
+        LoadElevatorScene();
     }
     protected override IEnumerator MinigameProtocol_CO()
     {
