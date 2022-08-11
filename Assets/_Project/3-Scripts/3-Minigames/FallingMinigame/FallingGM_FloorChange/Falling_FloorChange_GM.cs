@@ -124,14 +124,16 @@ namespace PA.MinigameManager
 		private IEnumerator ChangeFloorGroup_CO(int index)
 		{
 			float time = 0f;
-			while (time < 0.5f)
+
+			for (int ii = 0; ii < 5; ii++)
 			{
 				currentActiveMeshGroup.SetActive(false);
 				floorGroupMeshes[index].SetActive(true);
-				yield return new WaitForSeconds(time);
+				yield return new WaitForSeconds(time - 0.1f);
 				currentActiveMeshGroup.SetActive(true);
 				floorGroupMeshes[index].SetActive(false);
-				time += 0.1f;
+				yield return new WaitForSeconds(time);
+				time += 0.15f;
 			}
 
 			currentActiveMeshGroup.SetActive(false);
