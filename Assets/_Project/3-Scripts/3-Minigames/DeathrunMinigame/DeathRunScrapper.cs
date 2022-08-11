@@ -10,8 +10,9 @@ public class DeathRunScrapper : MinigameScraper
     private float voteHold;
     private float voteNow;
     private float temp;
-    public float trapTimeOutTimer;
+    public float trapAfterActivation;
     private float trapTimerStart;
+    public bool startTimer;
 
     public DeathrunPressureTrap currentTrap;
 
@@ -22,7 +23,8 @@ public class DeathRunScrapper : MinigameScraper
 
         voteHold = 0;
         voteNow = 0;
-        trapTimerStart = trapTimeOutTimer;
+        trapTimerStart = trapAfterActivation;
+        startTimer = true;
 
     }
 
@@ -42,10 +44,19 @@ public class DeathRunScrapper : MinigameScraper
 
     public void MajorityVote()
     {
-        if (trapTimeOutTimer <= 0)
+        voteNow = _countList["now"];
+        voteHold = _countList["hold"];
+
+        if (trapAfterActivation >= 0 && startTimer)
         {
-            voteNow = _countList["now"];
-            voteHold = _countList["hold"];
+            
+            trapAfterActivation -= 1 * Time.deltaTime;
+        }
+
+        if (trapAfterActivation <= 0)
+        {
+            Debug.Log(temp);
+            startTimer = false;
 
             temp = voteNow / (voteNow + voteHold);
 
@@ -53,6 +64,8 @@ public class DeathRunScrapper : MinigameScraper
             {
                 ClearList();
                 currentTrap.ActivateTrap();
+                trapAfterActivation = trapTimerStart;
+                startTimer = true;
 
             }
 

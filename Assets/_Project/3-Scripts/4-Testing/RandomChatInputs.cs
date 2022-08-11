@@ -27,9 +27,6 @@ namespace  Testing
 
         private void Awake()
         {
-            if (SceneManager.GetSceneByName("CircularMaze_1") != null) inputs = new() { "cw" };
-            else inputs = new() { "up", "down", "left", "right" };
-
             lowRange = 0;
             highRange = inputs.Count;
             StartCoroutine(UpdateRanges());
@@ -42,6 +39,7 @@ namespace  Testing
             string author = firstName[Random.Range(0,firstName.Count)] + " " + lastName[Random.Range(0,lastName.Count)];
             string message = inputs[Random.Range(lowRange, highRange)];
             ChatReader.current.ProcessTestInput(author, message);
+            Debug.Log(message);
             StartCoroutine(Inputs());
         }
         

@@ -18,15 +18,6 @@ public class DeathrunPressureTrap : MonoBehaviour
     }
 
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            ActivateTrap();
-        }
-    }
-
-
     public void NextTrap()
     {
 

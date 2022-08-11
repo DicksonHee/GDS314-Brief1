@@ -11,7 +11,7 @@ public class DeathRunGM : MinigameManager
     protected override void Awake()
     {
         base.Awake();
-        dRScraper = (DeathRunScrapper)scraper;
+        dRScraper = (DeathRunScrapper) scraper;
         Invoke(nameof(StartProtocol), _initialStartDelay);
 
     }
@@ -41,8 +41,6 @@ public class DeathRunGM : MinigameManager
     protected override void NotAcceptingInputsState()
     {
         base.NotAcceptingInputsState();
-
-        if (maxTime == 0) EndGameState();
     }
 
     protected override void EndGameState()
