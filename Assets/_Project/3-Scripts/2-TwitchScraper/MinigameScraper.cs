@@ -54,13 +54,13 @@ namespace Scraper
         protected void AddMessage(string message)
         {
             _countList[message]++;
-            ChatInputVisualiser.current.AcceptInput(message);
+            //ChatInputVisualiser.current.AcceptInput(message);
         }
 
         protected void RemoveMessage(string message)
         {
             _countList[message]--;
-            ChatInputVisualiser.current.RemoveInput(message);
+            //ChatInputVisualiser.current.RemoveInput(message);
         }
         
         protected void DebugMessage(string debugMessage)

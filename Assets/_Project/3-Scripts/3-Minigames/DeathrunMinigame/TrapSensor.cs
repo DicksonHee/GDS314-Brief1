@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class TrapSensor : MonoBehaviour
 {
-    private DeathrunPressureTrap pressureTrap;
-
-    private void Awake()
-    {
-        pressureTrap = GetComponentInParent<DeathrunPressureTrap>();
-    }
+    public DeathRunGM deathRunGM;
+    [SerializeField]
+    Collider player;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (player == other)
         {
             Debug.Log("entered area");
-            pressureTrap.inTriggerZone = true;
+            deathRunGM.inTriggerZone = true;
 
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (player == other)
         {
             Debug.Log("leaving area");
-            pressureTrap.inTriggerZone = false;
+            deathRunGM.inTriggerZone = false;
         }
     }
 }

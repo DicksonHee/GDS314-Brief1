@@ -8,11 +8,20 @@ public class DeathRunGM : MinigameManager
 {
     public int maxTime;
     private DeathRunScrapper dRScraper;
+
+    public bool inTriggerZone;
+    
+    public GameObject[] triggerZone;
+    private int currentTrap;
+    public GameObject activeTrigger;
+    public DeathAnimation deathAnim;
+
     protected override void Awake()
     {
         base.Awake();
         dRScraper = (DeathRunScrapper) scraper;
         Invoke(nameof(StartProtocol), _initialStartDelay);
+        currentTrap = 0;
 
     }
 
@@ -35,6 +44,35 @@ public class DeathRunGM : MinigameManager
     protected override void RunningInputsState()
     {
         base.RunningInputsState();
+
+    }
+
+    public void NextTrap()
+    {
+        activeTrigger.SetActive(false);
+
+        currentTrap++;
+        activeTrigger = triggerZone[currentTrap];
+        activeTrigger.SetActive(true);
+        Debug.Log("trap set");
+    }
+
+
+    public void ActivateTrap()
+    {
+
+        Debug.Log("trap activated");
+        if (inTriggerZone)
+        {
+            Debug.Log("killing player");
+            deathAnim.UponDeath();
+            // connect to death script/function and activate it
+
+        }
+        
+        // play effects from each trap
+        NextTrap();
+
 
     }
 
