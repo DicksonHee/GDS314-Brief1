@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/_Project/5-Scenes/NewStartScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/_Project/5-Scenes/StartScene.unity
-    guid: 0e9a33c592ea29844abfd2937c397cc9
-  - enabled: 1
-    path: Assets/_Project/5-Scenes/TestScenes/Dickson_TestScene.unity
-    guid: 9bd7b83c3d85a0f429e5d1f6becda108
+    path: Assets/_Project/5-Scenes/ElevatorScene.unity
+    guid: 8c8f52c81240b814db36b356cfd13d26
   - enabled: 1
     path: Assets/_Project/5-Scenes/LoadScene.unity
     guid: ca2cff6b0bc384944b22cc1ea03b2431

@@ -69,6 +69,6 @@ public class StartMenu_UI : MonoBehaviour
         chatReader.AddComponent<ChatReader>();
         chatReader.name = "ChatReader";
         if(SessionData.twitchChannelName == "test") chatReader.AddComponent<RandomChatInputs>();
-        SceneLoad_Manager.LoadSpecificScene(SessionManager.current.GetNextRandomScene());
+        SceneLoad_Manager.LoadSpecificScene(firstSceneName);
     }
 }

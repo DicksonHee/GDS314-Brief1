@@ -66,5 +66,10 @@ namespace PA.MinigameManager
         {
             yield return null;
         }
+
+        protected virtual void LoadElevatorScene()
+        {
+            SceneLoad_Manager.LoadSpecificScene("ElevatorScene");
+        }
     }
 }
