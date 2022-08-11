@@ -1,0 +1,120 @@
+using System.Collections;
+using System.Collections.Generic;
+using MyPlayer.Movement;
+using UnityEngine;
+
+namespace PA.MinigameManager
+{
+	public class Falling_FloorChange_GM : MinigameManager
+	{
+		private Falling_FloorChangeScraper floorChangeScraper;
+		public Transform spawnPosition;
+
+		public List<GameObject> floorGroup;
+
+		private GameObject currentActiveFloorGroup;
+
+		protected override void Awake()
+		{
+			floorChangeScraper = (Falling_FloorChangeScraper) scraper;
+			currentActiveFloorGroup = floorGroup[0];
+
+			PreGameState();
+			Invoke(nameof(StartProtocol), _initialStartDelay);
+		}
+
+		protected override void Update()
+		{
+			base.Update();
+		}
+
+		protected override void PreGameState()
+		{
+			base.PreGameState();
+			PlayerMovement.current.SetCanMove(false);
+			PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
+			Debug.Log("Pre");
+		}
+
+		protected override void AcceptingInputsState()
+		{
+			base.AcceptingInputsState();
+			Debug.Log("Accept");
+		}
+
+		protected override void RunningInputsState()
+		{
+			base.RunningInputsState();
+			Debug.Log("Running");
+			floorChangeScraper.GetFloorIndex();
+		}
+
+		protected override void NotAcceptingInputsState()
+		{
+			base.NotAcceptingInputsState();
+			floorChangeScraper.ClearList();
+			Debug.Log("NotAccept");
+		}
+
+		protected override void EndGameState()
+		{
+			base.EndGameState();
+		}
+
+		public override void EndGame()
+		{
+			StopAllCoroutines();
+			PlayerMovement.current.movementSpeed = 0;
+			LoadElevatorScene();
+		}
+		
+		public override void KillPlayer()
+		{
+			PlayerMovement.current.SetTrigger("Fall");
+			PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
+			PlayerMovement.current.SetCanMove(false);
+		}
+
+		protected override IEnumerator MinigameProtocol_CO()
+		{
+			AcceptingInputsState();
+			yield return new WaitForSeconds(_acceptingInputDuration);
+			RunningInputsState();
+			NotAcceptingInputsState();
+			yield return new WaitForSeconds(_notAcceptingInputDuration);
+
+			StartCoroutine(MinigameProtocol_CO());
+		}
+
+		private void ChangeFloorGroup(int index)
+		{
+			for (int ii = 0; ii < floorGroup.Count; ii++)
+			{
+				if (ii == index)
+				{
+					StartCoroutine(ChangeFloorGroup_CO(ii));
+				}
+				else floorGroup[ii].SetActive(false);
+			}
+		}
+
+		private IEnumerator ChangeFloorGroup_CO(int index)
+		{
+			float time = 0f;
+			while (time < 0.5f)
+			{
+				currentActiveFloorGroup.SetActive(false);
+				floorGroup[index].SetActive(true);
+				yield return new WaitForSeconds(time);
+				currentActiveFloorGroup.SetActive(true);
+				floorGroup[index].SetActive(false);
+				time += 0.1f;
+			}
+
+			currentActiveFloorGroup.SetActive(false);
+
+			floorGroup[index].SetActive(true);
+			currentActiveFloorGroup = floorGroup[index];
+		}
+	}
+}
