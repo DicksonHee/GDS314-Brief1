@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class KillFloor : MonoBehaviour
 {
-    public FallingGM fallingGm;
+    public MinigameManager fallingGm;
     
     private void OnCollisionEnter(Collision collision)
     {

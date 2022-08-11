@@ -27,9 +27,6 @@ namespace  Testing
 
         private void Awake()
         {
-            if (SceneManager.GetSceneByName("CircularMaze_1") != null) inputs = new() { "cw" };
-            else inputs = new() { "up", "down", "left", "right" };
-
             lowRange = 0;
             highRange = inputs.Count;
             StartCoroutine(UpdateRanges());
