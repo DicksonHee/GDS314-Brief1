@@ -10,17 +10,40 @@ namespace PA.MinigameManager
 		private Falling_FloorChangeScraper floorChangeScraper;
 		public Transform spawnPosition;
 
-		public List<GameObject> floorGroup;
+		public int initialGroup;
+		public List<GameObject> floorGroupMeshes;
+		public List<GameObject> floorGroupColliders;
 
-		private GameObject currentActiveFloorGroup;
+		private GameObject currentActiveMeshGroup;
+		private GameObject currentActiveColliderGroup;
 
 		protected override void Awake()
 		{
 			floorChangeScraper = (Falling_FloorChangeScraper) scraper;
-			currentActiveFloorGroup = floorGroup[0];
+			InitialiseMeshAndColliders();
 
 			PreGameState();
 			Invoke(nameof(StartProtocol), _initialStartDelay);
+		}
+
+		private void InitialiseMeshAndColliders()
+		{
+			for (int ii = 0; ii < floorGroupMeshes.Count; ii++)
+			{
+				if (ii == initialGroup)
+				{
+					floorGroupMeshes[ii].SetActive(true);
+					floorGroupColliders[ii].SetActive(true);
+				}
+				else
+				{
+					floorGroupMeshes[ii].SetActive(false);
+					floorGroupColliders[ii].SetActive(false);
+				}
+			}
+
+			currentActiveMeshGroup = floorGroupMeshes[initialGroup];
+			currentActiveColliderGroup = floorGroupColliders[initialGroup];
 		}
 
 		protected override void Update()
@@ -46,7 +69,7 @@ namespace PA.MinigameManager
 		{
 			base.RunningInputsState();
 			Debug.Log("Running");
-			floorChangeScraper.GetFloorIndex();
+			ChangeFloorGroup(floorChangeScraper.GetFloorIndex());
 		}
 
 		protected override void NotAcceptingInputsState()
@@ -88,13 +111,13 @@ namespace PA.MinigameManager
 
 		private void ChangeFloorGroup(int index)
 		{
-			for (int ii = 0; ii < floorGroup.Count; ii++)
+			for (int ii = 0; ii < floorGroupMeshes.Count; ii++)
 			{
 				if (ii == index)
 				{
 					StartCoroutine(ChangeFloorGroup_CO(ii));
 				}
-				else floorGroup[ii].SetActive(false);
+				else floorGroupMeshes[ii].SetActive(false);
 			}
 		}
 
@@ -103,18 +126,21 @@ namespace PA.MinigameManager
 			float time = 0f;
 			while (time < 0.5f)
 			{
-				currentActiveFloorGroup.SetActive(false);
-				floorGroup[index].SetActive(true);
+				currentActiveMeshGroup.SetActive(false);
+				floorGroupMeshes[index].SetActive(true);
 				yield return new WaitForSeconds(time);
-				currentActiveFloorGroup.SetActive(true);
-				floorGroup[index].SetActive(false);
+				currentActiveMeshGroup.SetActive(true);
+				floorGroupMeshes[index].SetActive(false);
 				time += 0.1f;
 			}
 
-			currentActiveFloorGroup.SetActive(false);
+			currentActiveMeshGroup.SetActive(false);
+			currentActiveColliderGroup.SetActive(false);
 
-			floorGroup[index].SetActive(true);
-			currentActiveFloorGroup = floorGroup[index];
+			floorGroupMeshes[index].SetActive(true);
+			floorGroupColliders[index].SetActive(true);
+			currentActiveMeshGroup = floorGroupMeshes[index];
+			currentActiveColliderGroup = floorGroupColliders[index];
 		}
 	}
 }
