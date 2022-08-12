@@ -80,16 +80,7 @@ public class DeathRunGM : MinigameManager
     {
         if (trapEffects[currentTrap] != null)
         {
-            if (trapEffects[0] = trapEffects[currentTrap])
-            {
-                trapEffects[currentTrap].SetActive(true);
-            }
-            else
-            {
-                trapEffects[currentTrap-1].SetActive(false);
-                trapEffects[currentTrap].SetActive(true);
-            }
-            
+            trapEffects[currentTrap].SetActive(true);
         }
         
     }
@@ -111,7 +102,6 @@ public class DeathRunGM : MinigameManager
         
         // play effects from each trap
         NextTrap();
-
 
     }
 
