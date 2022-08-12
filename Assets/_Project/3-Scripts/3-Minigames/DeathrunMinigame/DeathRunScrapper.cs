@@ -11,7 +11,7 @@ public class DeathRunScrapper : MinigameScraper
     private float voteNow;
     private float temp;
     public float trapAfterActivation;
-    private float trapTimerStart;
+    public float trapTimerStart;
     public bool startTimer;
 
     public DeathRunGM deathRunGameManager;
@@ -34,6 +34,7 @@ public class DeathRunScrapper : MinigameScraper
         MajorityVote();
     }
 
+    
 
     public void ClearList()
     {
@@ -67,7 +68,7 @@ public class DeathRunScrapper : MinigameScraper
 
             temp = voteNow / (voteNow + voteHold);
 
-            if (temp >= 0.7 || deathRunGameManager.NextTrap)
+            if (temp >= 0.7)
             {
                 ClearList();
                 deathRunGameManager.ActivateTrap();

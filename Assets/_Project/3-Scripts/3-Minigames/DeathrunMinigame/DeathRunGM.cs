@@ -10,11 +10,18 @@ public class DeathRunGM : MinigameManager
     private DeathRunScrapper dRScraper;
 
     public bool inTriggerZone;
+    public bool resetTimer;
     
     public GameObject[] triggerZone;
     private int currentTrap;
     public GameObject activeTrigger;
     public DeathAnimation deathAnim;
+    public GameObject[] trapEffects;
+
+    public float timeTillEmitterEnd;
+    private float emitterStartTime;
+    public bool emitterTimerStart;
+    private GameObject emmiterToBeDeactivated;
 
     protected override void Awake()
     {
@@ -22,6 +29,7 @@ public class DeathRunGM : MinigameManager
         dRScraper = (DeathRunScrapper) scraper;
         Invoke(nameof(StartProtocol), _initialStartDelay);
         currentTrap = 0;
+        emitterTimerStart = false;
 
     }
 
@@ -49,23 +57,54 @@ public class DeathRunGM : MinigameManager
 
     public void NextTrap()
     {
+        // set the active trap that is currently set to be invisible
+        // go to the next trap
+        // turn on the next traps active
         activeTrigger.SetActive(false);
-
         currentTrap++;
         activeTrigger = triggerZone[currentTrap];
         activeTrigger.SetActive(true);
         Debug.Log("trap set");
+
+
+
+        // reset the timer and start it in the deathrun scrapper
+        dRScraper.trapAfterActivation = dRScraper.trapTimerStart;
+        dRScraper.startTimer = true;
+
+
     }
 
 
+    public void ActivateTrapEffect()
+    {
+        if (trapEffects[currentTrap] != null)
+        {
+            if (trapEffects[0] = trapEffects[currentTrap])
+            {
+                trapEffects[currentTrap].SetActive(true);
+            }
+            else
+            {
+                trapEffects[currentTrap-1].SetActive(false);
+                trapEffects[currentTrap].SetActive(true);
+            }
+            
+        }
+        
+    }
+
     public void ActivateTrap()
     {
+        ActivateTrapEffect();
 
         Debug.Log("trap activated");
         if (inTriggerZone)
         {
             Debug.Log("killing player");
             deathAnim.UponDeath();
+            
+            
             // connect to death script/function and activate it
 
         }
@@ -76,6 +115,13 @@ public class DeathRunGM : MinigameManager
 
     }
 
+    public override void EndGame()
+    {
+        StopAllCoroutines();
+        PlayerMovement.current.movementSpeed = 0;
+        LoadElevatorScene();
+    }
+
     protected override void NotAcceptingInputsState()
     {
         base.NotAcceptingInputsState();
@@ -84,10 +130,6 @@ public class DeathRunGM : MinigameManager
     protected override void EndGameState()
     {
         base.EndGameState();
-
-        StopAllCoroutines();
-        PlayerMovement.current.movementSpeed = 0;
-        LoadElevatorScene();
     }
     protected override IEnumerator MinigameProtocol_CO()
     {
