@@ -80,6 +80,13 @@ public class DeathRunGM : MinigameManager
     {
         if (trapEffects[currentTrap] != null)
         {
+            for (int i = 0; i < timeTillEmitterEnd; i++)
+            {
+                if(i != currentTrap)
+                {
+                    trapEffects[i].SetActive(false);
+                }
+            }
             trapEffects[currentTrap].SetActive(true);
         }
         
