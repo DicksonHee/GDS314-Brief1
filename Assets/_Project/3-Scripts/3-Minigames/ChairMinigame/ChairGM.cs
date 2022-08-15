@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class ChairGM : MinigameManager
 {
-    public int maxTime;
-    public TMP_Text text;
-    
     private ChairAssignment chairAssignment;
     
     protected override void Awake()
@@ -18,7 +15,7 @@ public class ChairGM : MinigameManager
 
         chairAssignment = GetComponent<ChairAssignment>();
         Invoke(nameof(StartProtocol), _initialStartDelay);
-        Invoke(nameof(StartTimer), _initialStartDelay);
+        if(maxTime > 0) Invoke(nameof(StartTimer), _initialStartDelay);
     }
 
     protected override void Update()
@@ -49,28 +46,19 @@ public class ChairGM : MinigameManager
     {
         base.NotAcceptingInputsState();
         
-        if (maxTime == 0) EndGameState();
+        if (maxTime <= 0) PlayerWin();
     }
 
-    protected override void EndGameState()
-    {
-        base.EndGameState();
-        
-        StopAllCoroutines();
-        PlayerMovement.current.movementSpeed = 0;
-        LoadElevatorScene();
-    }
-
-    public override void KillPlayer()
+    public override void EndGame(bool hasWon = false)
     {
         EndGameState();
+        StopAllCoroutines();
+        PlayerMovement.current.movementSpeed = 0;
+        
+        if(hasWon) LoadElevatorScene();
+        else LoadMainMenuScene();
     }
 
-    private void StartTimer()
-    {
-        StartCoroutine(DecrementGameTimer());
-    }
-    
     protected override IEnumerator MinigameProtocol_CO()
     {
         AcceptingInputsState();
@@ -80,13 +68,5 @@ public class ChairGM : MinigameManager
         yield return new WaitForSeconds(_notAcceptingInputDuration);
 
         StartCoroutine(MinigameProtocol_CO());
-    }
-
-    private IEnumerator DecrementGameTimer()
-    {
-        maxTime--;
-        text.text = "" + maxTime;
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(DecrementGameTimer());
     }
 }

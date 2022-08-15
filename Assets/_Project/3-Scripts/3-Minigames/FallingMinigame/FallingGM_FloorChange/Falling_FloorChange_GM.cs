@@ -24,8 +24,22 @@ namespace PA.MinigameManager
 
 			PreGameState();
 			Invoke(nameof(StartProtocol), _initialStartDelay);
+			if(maxTime > 0) Invoke(nameof(StartTimer), _initialStartDelay + 2f);
 		}
 
+		private void OnEnable()
+		{
+			OnTimerStop += PlayerLose;
+		}
+
+		private void OnDisable()
+		{
+			OnTimerStop -= PlayerLose;
+		}
+		
+		public void PlayerWin() => EndGame(true);
+		public void PlayerLose() => EndGame();
+		
 		private void InitialiseMeshAndColliders()
 		{
 			for (int ii = 0; ii < floorGroupMeshes.Count; ii++)
@@ -56,19 +70,16 @@ namespace PA.MinigameManager
 			base.PreGameState();
 			PlayerMovement.current.SetCanMove(false);
 			PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
-			Debug.Log("Pre");
 		}
 
 		protected override void AcceptingInputsState()
 		{
 			base.AcceptingInputsState();
-			Debug.Log("Accept");
 		}
 
 		protected override void RunningInputsState()
 		{
 			base.RunningInputsState();
-			Debug.Log("Running");
 			ChangeFloorGroup(floorChangeScraper.GetFloorIndex());
 		}
 
@@ -76,7 +87,6 @@ namespace PA.MinigameManager
 		{
 			base.NotAcceptingInputsState();
 			floorChangeScraper.ClearList();
-			Debug.Log("NotAccept");
 		}
 
 		protected override void EndGameState()
@@ -84,7 +94,7 @@ namespace PA.MinigameManager
 			base.EndGameState();
 		}
 
-		public override void EndGame()
+		public override void EndGame(bool hasWon = false)
 		{
 			StopAllCoroutines();
 			PlayerMovement.current.movementSpeed = 0;

@@ -43,22 +43,22 @@ public class ChairObject : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	private IEnumerator MoveChair_CO(Vector3 moveDir)
+	private void MoveChair(Vector3 moveDir)
 	{
-		yield return new WaitForSeconds(1);
+		//yield return new WaitForSeconds(0.5f);
 		GetComponent<Rigidbody>().AddForce(moveDir * chairSpeed, ForceMode.Impulse);
 	}
 
-	private void MoveChair(Vector3 moveDir)
-	{
-		StartCoroutine(MoveChair_CO(moveDir));
-	}
+	// private void MoveChair(Vector3 moveDir)
+	// {
+	// 	//StartCoroutine(MoveChair_CO(moveDir));
+	// }
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
-			MinigameManager.current.KillPlayer();
+			MinigameManager.current.EndGame();
 		}
 	}
 }
