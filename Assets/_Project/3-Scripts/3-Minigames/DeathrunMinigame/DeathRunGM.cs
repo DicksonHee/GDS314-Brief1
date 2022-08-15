@@ -18,10 +18,9 @@ public class DeathRunGM : MinigameManager
     public DeathAnimation deathAnim;
     public GameObject[] trapEffects;
 
-    public float timeTillEmitterEnd;
+    public float emitterTime;
     private float emitterStartTime;
-    public bool emitterTimerStart;
-    private GameObject emmiterToBeDeactivated;
+    private bool stopEmitter;
 
     protected override void Awake()
     {
@@ -29,7 +28,7 @@ public class DeathRunGM : MinigameManager
         dRScraper = (DeathRunScrapper) scraper;
         Invoke(nameof(StartProtocol), _initialStartDelay);
         currentTrap = 0;
-        emitterTimerStart = false;
+        stopEmitter = false;
 
     }
 
@@ -78,16 +77,15 @@ public class DeathRunGM : MinigameManager
 
     public void ActivateTrapEffect()
     {
+
+        
+        emitterTime = emitterStartTime;
+        
         if (trapEffects[currentTrap] != null)
         {
-            for (int i = 0; i < timeTillEmitterEnd; i++)
-            {
-                if(i != currentTrap)
-                {
-                    trapEffects[i].SetActive(false);
-                }
-            }
+
             trapEffects[currentTrap].SetActive(true);
+            
         }
         
     }
