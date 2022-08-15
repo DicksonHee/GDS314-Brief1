@@ -30,7 +30,7 @@ public class MazeGM : MinigameManager
 		}
 	}
 
-	public override void EndGame()
+	public override void EndGame(bool hasWon = false)
 	{
 		StopAllCoroutines();
 		PlayerMovement.current.movementSpeed = 0;

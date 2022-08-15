@@ -12,7 +12,7 @@ public class EndTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            minigameManager.EndGame();
+            minigameManager.PlayerWin();
         }
     }
 }

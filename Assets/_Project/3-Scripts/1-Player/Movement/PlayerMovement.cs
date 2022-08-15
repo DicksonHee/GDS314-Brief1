@@ -140,7 +140,7 @@ namespace MyPlayer.Movement
             {
                 if (!Physics.Raycast(stepUpperDetector.transform.position, transform.TransformDirection(Vector3.forward), out _, 0.2f))
                 {
-                    position += new Vector3(position.x, stepSmoothAmount, position.z);
+                    position = new Vector3(position.x, stepSmoothAmount + position.y, position.z);
                     _rigidbody.position = position;
                 }
             }
@@ -149,7 +149,7 @@ namespace MyPlayer.Movement
             {
                 if (!Physics.Raycast(stepUpperDetector.transform.position, transform.TransformDirection(1.5f,0f,1f), out _, 0.2f))
                 {
-                    position += new Vector3(position.x, stepSmoothAmount, position.z);
+                    position = new Vector3(position.x, stepSmoothAmount + position.y, position.z);
                     _rigidbody.position = position;
                 }
             }
@@ -158,7 +158,7 @@ namespace MyPlayer.Movement
             {
                 if (!Physics.Raycast(stepUpperDetector.transform.position, transform.TransformDirection(-1.5f,0f,1f), out _, 0.2f))
                 {
-                    position += new Vector3(position.x, stepSmoothAmount, position.z);
+                    position = new Vector3(position.x, stepSmoothAmount + position.y, position.z);
                     _rigidbody.position = position;
                 }
             }
