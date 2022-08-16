@@ -11668,6 +11668,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 979657335}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &979657337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f2d34a2af9a170b4cb9d5dad3b61ac64,
+    type: 3}
+  m_PrefabInstance: {fileID: 979657335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &979657338
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979657337}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.017242711, z: 0.0000000010277461}
+  m_Center: {x: -1.643473e-11, y: -0.0013786452, z: 8.217366e-11}
+--- !u!114 &979657339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979657337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c153d8875c35c74bb091df5f297f3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallingGm: {fileID: 2070730549}
 --- !u!4 &986472539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4013124261378960150, guid: 509fb918891dec94f81a8dec3fa4baf3,
@@ -23484,7 +23516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072511061}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8, y: -2.9, z: 11.1}
+  m_LocalPosition: {x: 6.8, y: -1.23, z: 11.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

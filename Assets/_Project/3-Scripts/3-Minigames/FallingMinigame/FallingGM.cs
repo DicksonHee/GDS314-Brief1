@@ -65,16 +65,25 @@ namespace PA.MinigameManager
 			StopAllCoroutines();
 
 			PlayerMovement.current.movementSpeed = 0;
+			
 			if (hasWon)
 			{
-				UnityEngine.Analytics.Analytics.CustomEvent("Level Win" + SceneManager.GetActiveScene(), 
-					new Dictionary<string, object> { { "Time Remaining", maxTime } });
+				UnityEngine.Analytics.Analytics.CustomEvent("Level Win", 
+					new Dictionary<string, object>
+					{
+						{"Scene", SceneManager.GetActiveScene()},
+						{ "Time Remaining", maxTime }
+					});
 				LoadElevatorScene();
 			}
 			else
 			{
-				UnityEngine.Analytics.Analytics.CustomEvent("Level Lose" + SceneManager.GetActiveScene(), 
-					new Dictionary<string, object> { { "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position } });
+				UnityEngine.Analytics.Analytics.CustomEvent("Level Lose",
+					new Dictionary<string, object>
+					{
+						{"Scene", SceneManager.GetActiveScene()},
+						{ "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position }
+					});
 				LoadMainMenuScene();
 			}
 		}
