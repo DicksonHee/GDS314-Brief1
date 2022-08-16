@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MyPlayer.Movement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PA.MinigameManager
 {
@@ -98,7 +99,19 @@ namespace PA.MinigameManager
 		{
 			StopAllCoroutines();
 			PlayerMovement.current.movementSpeed = 0;
-			LoadElevatorScene();
+			
+			if (hasWon)
+			{
+				UnityEngine.Analytics.Analytics.CustomEvent("Level Win" + SceneManager.GetActiveScene(), 
+					new Dictionary<string, object> { { "Time Remaining", maxTime } });
+				LoadElevatorScene();
+			}
+			else
+			{
+				UnityEngine.Analytics.Analytics.CustomEvent("Level Lose" + SceneManager.GetActiveScene(), 
+					new Dictionary<string, object> { { "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position } });
+				LoadMainMenuScene();
+			}
 		}
 		
 		public override void KillPlayer()

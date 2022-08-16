@@ -4,6 +4,7 @@ using MyPlayer.Movement;
 using PA.MinigameManager;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChairGM : MinigameManager
 {
@@ -55,8 +56,18 @@ public class ChairGM : MinigameManager
         StopAllCoroutines();
         PlayerMovement.current.movementSpeed = 0;
         
-        if(hasWon) LoadElevatorScene();
-        else LoadMainMenuScene();
+        if (hasWon)
+        {
+            UnityEngine.Analytics.Analytics.CustomEvent("Level Win" + SceneManager.GetActiveScene(), 
+                new Dictionary<string, object> { { "Time Remaining", maxTime } });
+            LoadElevatorScene();
+        }
+        else
+        {
+            UnityEngine.Analytics.Analytics.CustomEvent("Level Lose" + SceneManager.GetActiveScene(), 
+                new Dictionary<string, object> { { "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position } });
+            LoadMainMenuScene();
+        }
     }
 
     protected override IEnumerator MinigameProtocol_CO()

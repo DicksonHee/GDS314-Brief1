@@ -16,6 +16,12 @@ public class StartMenu_UI : MonoBehaviour
     public TMP_InputField inputField;
     public string firstSceneName;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void OpenStartPanel()
     {
         _canvasAnimator.SetTrigger("FadeMain");

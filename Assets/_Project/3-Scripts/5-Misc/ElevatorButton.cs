@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class ElevatorButton : MonoBehaviour
 {
+    public Animator screenAnimator;
+    public GameObject buttonLight;
+    
     private Camera _cam;
+    private bool isPressed;
     
     private void Awake()
     {
@@ -17,13 +21,18 @@ public class ElevatorButton : MonoBehaviour
         {
             if(Physics.Raycast(_cam.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2)), out RaycastHit hitInfo, 5f))
             {
-                if (hitInfo.collider.gameObject == gameObject) StartCoroutine(StartLoading_CO());
+                if (hitInfo.collider.gameObject == gameObject)
+                {
+                    if (!isPressed) StartCoroutine(StartLoading_CO());
+                }
             }
         }
     }
 
     private IEnumerator StartLoading_CO()
     {
+        buttonLight.SetActive(false);
+        screenAnimator.SetTrigger("Fall");
         yield return new WaitForSeconds(10f);
         SceneLoad_Manager.LoadSpecificScene(SessionManager.current.GetNextRandomScene());
     }
