@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scraper;
 using TMPro;
+using Random = UnityEngine.Random;
 
 namespace PA.MinigameManager
 {
@@ -12,7 +13,6 @@ namespace PA.MinigameManager
         [SerializeField] protected MinigameScraper scraper;
 
         public static MinigameManager current;
-
         protected TMP_Text timerText;
 
         public int maxTime = 0;
@@ -80,9 +80,9 @@ namespace PA.MinigameManager
             SceneLoad_Manager.LoadSpecificScene("ElevatorScene");
         }
         
-        protected virtual void LoadMainMenuScene()
+        protected virtual void LoadLoseScene()
         {
-            SceneLoad_Manager.LoadSpecificScene("NewStartScene");
+            SceneLoad_Manager.LoadSpecificScene("LoseScene");
         }
 
         protected void StartTimer()

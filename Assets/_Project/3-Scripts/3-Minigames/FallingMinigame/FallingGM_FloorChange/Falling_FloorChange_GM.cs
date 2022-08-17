@@ -118,7 +118,7 @@ namespace PA.MinigameManager
 						{"Scene", SceneManager.GetActiveScene()},
 						{ "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position }
 					});
-				LoadMainMenuScene();
+				LoadLoseScene();
 			}
 		}
 		

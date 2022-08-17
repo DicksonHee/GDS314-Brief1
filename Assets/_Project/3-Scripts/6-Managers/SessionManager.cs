@@ -9,6 +9,7 @@ public class SessionManager : MonoBehaviour
     public static SessionManager current;
     public List<MinigameData> minigameData;
     public List<MinigameType> minigameTypes;
+    public List<string> minigameScenes;
     
     private List<MinigameType> playedMinigames = new();
     private List<string> playedScenes = new();
@@ -23,32 +24,48 @@ public class SessionManager : MonoBehaviour
 
     public string GetNextRandomScene()
     {
-        MinigameType typeToLoad = MinigameType.None;
-        string sceneToLoad = "";
+        if (minigameScenes.Count == 0)
+        {
+            foreach (string scene in playedScenes)
+            {
+                minigameScenes.Add(scene);
+            }
+            playedScenes.Clear();
+        }
         
-        ShufflePlayedMinigamesList();
-        foreach (MinigameType minigameType in minigameTypes)
-        {
-            if (!playedMinigames.Contains(minigameType))
-            {
-                typeToLoad = minigameType;
-                break;
-            }
-        }
+        
+        string sceneToLoad = minigameScenes[Random.Range(0, minigameScenes.Count)];
+        minigameScenes.Remove(sceneToLoad);
+        playedScenes.Add(sceneToLoad);
 
-        MinigameData chosenData = null;
-        foreach (MinigameData data in minigameData)
-        {
-            if (data.minigameType == typeToLoad)
-            {
-                sceneToLoad = data.minigameSceneName;
-                chosenData = data;
-                break;
-            }
-        }
-
-        if(chosenData != null) minigameData.Remove(chosenData);
         return sceneToLoad;
+
+        // MinigameType typeToLoad = MinigameType.None;
+        // string sceneToLoad = "";
+        //
+        // ShufflePlayedMinigamesList();
+        // foreach (MinigameType minigameType in minigameTypes)
+        // {
+        //     if (!playedMinigames.Contains(minigameType))
+        //     {
+        //         typeToLoad = minigameType;
+        //         break;
+        //     }
+        // }
+        //
+        // MinigameData chosenData = null;
+        // foreach (MinigameData data in minigameData)
+        // {
+        //     if (data.minigameType == typeToLoad)
+        //     {
+        //         sceneToLoad = data.minigameSceneName;
+        //         chosenData = data;
+        //         break;
+        //     }
+        // }
+        //
+        // if(chosenData != null) minigameData.Remove(chosenData);
+        // return sceneToLoad;
     }
     
     private void ShufflePlayedMinigamesList()

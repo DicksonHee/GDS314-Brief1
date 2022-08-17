@@ -74,7 +74,7 @@ public class ChairGM : MinigameManager
                     {"Scene", SceneManager.GetActiveScene()},
                     { "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position }
                 });
-            LoadMainMenuScene();
+            LoadLoseScene();
         }
     }
 
