@@ -115,6 +115,8 @@ public class DeathRunGM : MinigameManager
         StopAllCoroutines();
         PlayerMovement.current.movementSpeed = 0;
         LoadElevatorScene();
+
+        base.EndGame(hasWon);
     }
 
     protected override void NotAcceptingInputsState()

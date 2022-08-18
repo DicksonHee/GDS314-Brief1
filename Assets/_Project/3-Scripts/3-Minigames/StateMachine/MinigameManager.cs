@@ -5,6 +5,7 @@ using UnityEngine;
 using Scraper;
 using TMPro;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 namespace PA.MinigameManager
 {
@@ -24,6 +25,7 @@ namespace PA.MinigameManager
         
         public event Action OnTimerStart;
         public event Action OnTimerStop;
+        public event Action OnGameEnded;
 
         protected virtual void Awake()
         {
@@ -59,6 +61,20 @@ namespace PA.MinigameManager
         
         public virtual void EndGame(bool hasWon = false)
         {
+            OnGameEnded?.Invoke();
+
+            if (hasWon)
+            {
+                AnalyticsData.SaveWinLoseData("Level Win " + gameObject.scene.name, 1);
+                AnalyticsData.SaveTimeRemainingData("Time Remaining " + gameObject.scene.name, maxTime);
+                LoadElevatorScene();
+            }
+            else
+            {
+                AnalyticsData.SaveWinLoseData("Level Lose " + gameObject.scene.name, 1);
+                AnalyticsData.SaveLosePositionData("Position On Lose " + gameObject.scene.name, GameObject.FindGameObjectWithTag("Player").transform.position);
+                LoadLoseScene();
+            }
         }
         
         public virtual void KillPlayer()

@@ -17,9 +17,15 @@ public class SessionManager : MonoBehaviour
     private void Awake()
     {
         current = this;
-        
+
+        InitialiseAnalyticsData();
         ShuffleMinigameDataList();
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void InitialiseAnalyticsData()
+    {
+        AnalyticsData.Load();
     }
 
     public string GetNextRandomScene()

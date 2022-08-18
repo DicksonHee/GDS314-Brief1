@@ -5659,6 +5659,8 @@ GameObject:
   - component: {fileID: 837206736}
   - component: {fileID: 837206735}
   - component: {fileID: 837206734}
+  - component: {fileID: 837206738}
+  - component: {fileID: 837206739}
   m_Layer: 5
   m_Name: Canvas_1
   m_TagString: Untagged
@@ -5749,6 +5751,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &837206738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837206733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284271cc8da9aea459eaf553dd97ba81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameManager: {fileID: 1274540930}
+--- !u!225 &837206739
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837206733}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &845392557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8423,8 +8450,6 @@ GameObject:
   - component: {fileID: 1274540930}
   - component: {fileID: 1274540929}
   - component: {fileID: 1274540928}
-  - component: {fileID: 1274540933}
-  - component: {fileID: 1274540932}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -8519,36 +8544,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1274540932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1274540927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c14d4db491208f4dbadf4d30c05b045, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputs:
-  - up
-  - down
-  - left
-  - right
---- !u!114 &1274540933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1274540927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95abcec83490e6c4daf74bab19542ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  channel: disguisedtoast
 --- !u!1 &1280848605
 GameObject:
   m_ObjectHideFlags: 0

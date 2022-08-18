@@ -6415,6 +6415,8 @@ GameObject:
   - component: {fileID: 1556111980}
   - component: {fileID: 1556111979}
   - component: {fileID: 1556111978}
+  - component: {fileID: 1556111982}
+  - component: {fileID: 1556111983}
   m_Layer: 5
   m_Name: Canvas_1
   m_TagString: Untagged
@@ -6505,6 +6507,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1556111982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556111977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284271cc8da9aea459eaf553dd97ba81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameManager: {fileID: 2070730547}
+--- !u!225 &1556111983
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556111977}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1586855525
 PrefabInstance:
   m_ObjectHideFlags: 0

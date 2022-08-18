@@ -1608,6 +1608,8 @@ GameObject:
   - component: {fileID: 544067829}
   - component: {fileID: 544067828}
   - component: {fileID: 544067827}
+  - component: {fileID: 544067831}
+  - component: {fileID: 544067832}
   m_Layer: 5
   m_Name: Canvas_1
   m_TagString: Untagged
@@ -1698,6 +1700,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &544067831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544067826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284271cc8da9aea459eaf553dd97ba81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameManager: {fileID: 2846324564402919646}
+--- !u!225 &544067832
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544067826}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &553481656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6813,3 +6840,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a7623506a2072f43b7a24f5ec14c131, type: 3}
+--- !u!114 &2846324564402919646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2846324563475310775, guid: 1a7623506a2072f43b7a24f5ec14c131,
+    type: 3}
+  m_PrefabInstance: {fileID: 2846324564402919645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124d3a4552a4e204fbce624fd902735c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -56,26 +56,7 @@ public class ChairGM : MinigameManager
         StopAllCoroutines();
         PlayerMovement.current.movementSpeed = 0;
         
-        if (hasWon)
-        {
-            UnityEngine.Analytics.Analytics.CustomEvent("Level Win", 
-                new Dictionary<string, object>
-                {
-                    {"Scene", SceneManager.GetActiveScene()},
-                    { "Time Remaining", maxTime }
-                });
-            LoadElevatorScene();
-        }
-        else
-        {
-            UnityEngine.Analytics.Analytics.CustomEvent("Level Lose",
-                new Dictionary<string, object>
-                {
-                    {"Scene", SceneManager.GetActiveScene()},
-                    { "Position On Lose", GameObject.FindGameObjectWithTag("Player").transform.position }
-                });
-            LoadLoseScene();
-        }
+        base.EndGame(hasWon);
     }
 
     protected override IEnumerator MinigameProtocol_CO()

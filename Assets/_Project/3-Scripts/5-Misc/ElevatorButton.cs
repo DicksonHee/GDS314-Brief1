@@ -33,7 +33,7 @@ public class ElevatorButton : MonoBehaviour
     {
         buttonLight.SetActive(false);
         screenAnimator.SetTrigger("Fall");
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(1f);
         SceneLoad_Manager.LoadSpecificScene(SessionManager.current.GetNextRandomScene());
     }
 }
