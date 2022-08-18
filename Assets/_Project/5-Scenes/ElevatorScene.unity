@@ -1549,6 +1549,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebde6f344fe5104c814d8396a2accae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonAudio: {fileID: 8300000, guid: d7add971b82afe84980dd1387bd4d8c9, type: 3}
+  screenAudio: {fileID: 8300000, guid: d53e4d124a34a2d47b53a213bdd2cef6, type: 3}
+  elevatorAudio: {fileID: 8300000, guid: 16c9a8095c7a6ca4d87bdf5b27615b00, type: 3}
   screenAnimator: {fileID: 1911450512}
   buttonLight: {fileID: 797229397}
 --- !u!1001 &500639981
