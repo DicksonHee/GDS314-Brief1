@@ -30,8 +30,8 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assembly-CSharp
-    - Assembly-CSharp-firstpass
     - Cinemachine
+    - Assembly-CSharp-firstpass
     - PPv2URPConverters
     - Analytics
     showAdvancedSettings: 1
