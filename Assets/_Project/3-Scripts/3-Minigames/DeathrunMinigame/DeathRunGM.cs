@@ -10,7 +10,7 @@ public class DeathRunGM : MinigameManager
     private DeathRunScrapper dRScraper;
 
     public bool inTriggerZone;
-    public bool resetTimer;
+    public bool resetTimser;
     
     public GameObject[] triggerZone;
     private int currentTrap;
@@ -18,9 +18,8 @@ public class DeathRunGM : MinigameManager
     public DeathAnimation deathAnim;
     public GameObject[] trapEffects;
 
-    public float emitterTime;
-    private float emitterStartTime;
-    private bool stopEmitter;
+    public bool timerOn;
+    public float timerTime;
 
     protected override void Awake()
     {
@@ -28,8 +27,21 @@ public class DeathRunGM : MinigameManager
         dRScraper = (DeathRunScrapper) scraper;
         Invoke(nameof(StartProtocol), _initialStartDelay);
         currentTrap = 0;
-        stopEmitter = false;
+        timerTime = 5;
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (timerTime >= 0 && timerOn)
+        {
+            timerTime -= Time.deltaTime;
+        }
+        else if (timerOn && timerTime <= 0)
+        {
+            Debug.Log("FINALLY ITS ALL OVER");
+            EndGame(false);
+        }
     }
 
     protected override void Update()
@@ -77,9 +89,6 @@ public class DeathRunGM : MinigameManager
 
     public void ActivateTrapEffect()
     {
-
-        
-        emitterTime = emitterStartTime;
         
         if (trapEffects[currentTrap] != null)
         {
@@ -99,8 +108,9 @@ public class DeathRunGM : MinigameManager
         {
             Debug.Log("killing player");
             deathAnim.UponDeath();
+            timerOn = true;
             
-            
+
             // connect to death script/function and activate it
 
         }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class TrapSensor : MonoBehaviour
 {
     public DeathRunGM deathRunGM;
-    [SerializeField]
-    Collider player;
+
+    public Collider player;
 
     private void OnTriggerEnter(Collider other)
     {
