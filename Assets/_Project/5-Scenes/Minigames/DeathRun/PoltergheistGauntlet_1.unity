@@ -811,6 +811,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 24424636}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &24720253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24720254}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &24720254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24720253}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.49, y: 3.47, z: 27.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &28808953
 GameObject:
   m_ObjectHideFlags: 0
@@ -51615,6 +51646,7 @@ GameObject:
   - component: {fileID: 1042465234}
   - component: {fileID: 1042465235}
   - component: {fileID: 1042465236}
+  - component: {fileID: 1042465237}
   m_Layer: 0
   m_Name: DeathRunGMObject
   m_TagString: Untagged
@@ -51635,31 +51667,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scraper: {fileID: 1042465235}
-  maxTime: 0
-  timerAnimator: {fileID: 0}
+  timerAnimator: {fileID: 1890963834}
+  maxTime: 120
   _initialStartDelay: 2
   _acceptingInputDuration: 2
   _notAcceptingInputDuration: 2
-  nextScene: 
-  maxTime: 0
+  spawnPosition: {fileID: 24720254}
   inTriggerZone: 0
-  resetTimser: 0
+  deathAnim: {fileID: 1482427447}
+  activeTrigger: {fileID: 1717980318}
   triggerZone:
   - {fileID: 1717980318}
   - {fileID: 1935561348}
   - {fileID: 1299300152}
   - {fileID: 1574377064}
   - {fileID: 1162961590}
-  activeTrigger: {fileID: 1717980318}
-  deathAnim: {fileID: 1482427447}
   trapEffects:
   - {fileID: 1501332381}
   - {fileID: 1320413148}
   - {fileID: 911226896}
   - {fileID: 37338884}
   - {fileID: 1276689015}
-  timerOn: 0
-  timerTime: 0
 --- !u!4 &1042465233
 Transform:
   m_ObjectHideFlags: 0
@@ -51713,12 +51741,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042465230}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95abcec83490e6c4daf74bab19542ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   channel: test
+--- !u!114 &1042465237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042465230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c14d4db491208f4dbadf4d30c05b045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputs:
+  - hold
+  - now
 --- !u!1001 &1043563068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73801,7 +73844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284271cc8da9aea459eaf553dd97ba81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameManager: {fileID: 0}
+  minigameManager: {fileID: 1042465232}
 --- !u!114 &1497836436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74360,11 +74403,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Predict when he will go and activate the traps and type hold to wait,
-    and now to activate the traps
+  m_text: 'Predict when he will go and activate the traps.
 
 
-    The paper idicates where the traps are'
+
+    The paper indicates
+    where the traps are'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06ff790e51c2fd544b6cd42775df624d, type: 2}
   m_sharedMaterial: {fileID: -9003501422914053843, guid: 06ff790e51c2fd544b6cd42775df624d,
@@ -100369,7 +100413,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

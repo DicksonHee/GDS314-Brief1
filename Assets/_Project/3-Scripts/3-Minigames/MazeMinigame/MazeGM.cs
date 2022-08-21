@@ -34,7 +34,6 @@ public class MazeGM : MinigameManager
 	{
 		StopAllCoroutines();
 		PlayerMovement.current.movementSpeed = 0;
-		SceneLoad_Manager.LoadSpecificScene(nextScene);
 	}
 
 	public void StartGame() => startGame = true;

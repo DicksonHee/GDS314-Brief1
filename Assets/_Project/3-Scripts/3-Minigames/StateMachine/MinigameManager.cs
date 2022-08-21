@@ -11,18 +11,18 @@ namespace PA.MinigameManager
 {
     public class MinigameManager : MonoBehaviour
     {
+        [Header("Manager Variables")]
         [SerializeField] protected MinigameScraper scraper;
 
-        public static MinigameManager current;
         protected TMP_Text timerText;
+        public static MinigameManager current;
 
-        public int maxTime = 0;
         public TimerAnimation timerAnimator;
+        public int maxTime = 0;
         public float _initialStartDelay = 2f;
         public float _acceptingInputDuration = 2f;
         public float _notAcceptingInputDuration = 2f;
-        public string nextScene;
-        
+
         public event Action OnTimerStart;
         public event Action OnTimerStop;
         public event Action OnGameEnded;

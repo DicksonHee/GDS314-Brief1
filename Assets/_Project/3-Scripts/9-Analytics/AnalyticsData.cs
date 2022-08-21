@@ -7,14 +7,13 @@ public static class AnalyticsData
     private static Dictionary<string, int> winLoseData;
     private static Dictionary<string, List<int>> timeRemainingData;
     private static Dictionary<string, List<Vector3>> losePositionData;
-    private static readonly string saveLocation = "C:/Users/dhee/Desktop/saveFile.txt";
 
     public static void SaveWinLoseData(string key, int num)
     {
         if (!winLoseData.TryGetValue(key, out _)) winLoseData.Add(key, 0);
         
         winLoseData[key] += num;
-        ES3.Save("WinLoseDict", winLoseData, saveLocation);
+        ES3.Save("WinLoseDict", winLoseData);
     }
 
     public static void SaveTimeRemainingData(string key, int num)
@@ -25,7 +24,7 @@ public static class AnalyticsData
         }
 
         timeRemainingData[key].Add(num);
-        ES3.Save("TimeRemainingDict", timeRemainingData, saveLocation);
+        ES3.Save("TimeRemainingDict", timeRemainingData);
     }
 
     public static void SaveLosePositionData(string key, Vector3 num)
@@ -36,18 +35,18 @@ public static class AnalyticsData
         }
 
         losePositionData[key].Add(num);
-        ES3.Save("LosePositionDict", losePositionData, saveLocation);
+        ES3.Save("LosePositionDict", losePositionData);
     }
 
     public static void Load()
     {
-        if (ES3.KeyExists("WinLoseDict", saveLocation)) winLoseData = (Dictionary<string, int>) ES3.Load("WinLoseDict", saveLocation);
+        if (ES3.KeyExists("WinLoseDict")) winLoseData = (Dictionary<string, int>) ES3.Load("WinLoseDict");
         else winLoseData = new();
 
-        if (ES3.KeyExists("TimeRemainingDict", saveLocation)) timeRemainingData = (Dictionary<string, List<int>>)ES3.Load("TimeRemainingDict", saveLocation);
+        if (ES3.KeyExists("TimeRemainingDict")) timeRemainingData = (Dictionary<string, List<int>>)ES3.Load("TimeRemainingDict");
         else timeRemainingData = new();
 
-        if (ES3.KeyExists("LosePositionDict", saveLocation)) losePositionData = (Dictionary<string, List<Vector3>>)ES3.Load("LosePositionDict", saveLocation);
+        if (ES3.KeyExists("LosePositionDict")) losePositionData = (Dictionary<string, List<Vector3>>)ES3.Load("LosePositionDict");
         else losePositionData = new();
     }
 }

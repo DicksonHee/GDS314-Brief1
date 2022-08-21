@@ -1962,7 +1962,9 @@ MonoBehaviour:
   - FallingGame_3
   - Gridiron_1
   - Gridiron_2
-  - GhostChase_1
+  - Gridiron_3
+  - PoltergheistGauntlet_1
+  - PoltergheistGauntlet_2
 --- !u!4 &822256376
 Transform:
   m_ObjectHideFlags: 0

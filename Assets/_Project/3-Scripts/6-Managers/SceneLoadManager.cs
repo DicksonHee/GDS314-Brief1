@@ -64,33 +64,31 @@ public static class SceneLoad_Manager
         LoadScreen.current.FadeIn(2f);
         yield return new WaitForSeconds(2f);
         
-        // Unload scenes in scenesToUnload
         foreach (string sceneName in scenesToUnload) UnloadScene(sceneName);
-        while (_scenesUnloading.Count > 0)
+        bool allUnloaded = false;
+        while (!allUnloaded)
         {
-            for (int ii = 0; ii < _scenesUnloading.Count; ii++)
+            allUnloaded = true;
+            foreach (AsyncOperation op in _scenesUnloading)
             {
-                if (_scenesUnloading[ii].isDone)
-                {
-                    _scenesUnloading.RemoveAt(ii);
-                }
+                if (!op.isDone) allUnloaded = false;
             }
             yield return null;
         }
+        _scenesUnloading.Clear();
         
-        // Load scenes in scenesToLoad
         foreach (string sceneName in scenesToLoad) LoadScene(sceneName);
-        while (_scenesLoading.Count > 0)
+        bool allLoaded = false;
+        while (!allLoaded)
         {
-            for (int ii = 0; ii < _scenesLoading.Count; ii++)
+            allLoaded = true;
+            foreach (AsyncOperation op in _scenesLoading)
             {
-                if (_scenesLoading[ii].isDone)
-                {
-                    _scenesLoading.RemoveAt(ii);
-                }
+                if (!op.isDone) allLoaded = false;
             }
             yield return null;
         }
+        _scenesLoading.Clear();
         
         // Fade the screen to clear
         LoadScreen.current.FadeOut(2f);

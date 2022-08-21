@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using MyPlayer.Movement;
@@ -6,42 +7,36 @@ using UnityEngine;
 
 public class DeathRunGM : MinigameManager
 {
-    public int maxTime;
     private DeathRunScrapper dRScraper;
-
-    public bool inTriggerZone;
-    public bool resetTimser;
-    
-    public GameObject[] triggerZone;
     private int currentTrap;
-    public GameObject activeTrigger;
-    public DeathAnimation deathAnim;
-    public GameObject[] trapEffects;
 
-    public bool timerOn;
-    public float timerTime;
+    public Transform spawnPosition;
+    public bool inTriggerZone;
+    public DeathAnimation deathAnim;
+    
+    [Header("Traps")]
+    public GameObject activeTrigger;
+    public GameObject[] triggerZone;
+    public GameObject[] trapEffects;
 
     protected override void Awake()
     {
         base.Awake();
         dRScraper = (DeathRunScrapper) scraper;
-        Invoke(nameof(StartProtocol), _initialStartDelay);
         currentTrap = 0;
-        timerTime = 5;
-
+        
+        StartTimer();
+        Invoke(nameof(StartProtocol), _initialStartDelay);
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        if (timerTime >= 0 && timerOn)
-        {
-            timerTime -= Time.deltaTime;
-        }
-        else if (timerOn && timerTime <= 0)
-        {
-            Debug.Log("FINALLY ITS ALL OVER");
-            EndGame(false);
-        }
+        OnTimerStop += PlayerLose;
+    }
+
+    private void OnDisable()
+    {
+        OnTimerStop -= PlayerLose;
     }
 
     protected override void Update()
@@ -66,6 +61,32 @@ public class DeathRunGM : MinigameManager
 
     }
 
+    protected override void NotAcceptingInputsState()
+    {
+        base.NotAcceptingInputsState();
+    }
+
+    protected override void EndGameState()
+    {
+        base.EndGameState();
+    }
+
+    public override void EndGame(bool hasWon = false)
+    {
+        StopAllCoroutines();
+        PlayerMovement.current.movementSpeed = 0;
+
+        base.EndGame(hasWon);
+    }
+    
+    public override void KillPlayer()
+    {
+        PlayerMovement.current.SetTrigger("Fall");
+        PlayerMovementActions.MovePlayerToLocation(spawnPosition.position, GameObject.FindGameObjectWithTag("Player"));
+        PlayerMovement.current.SetCanMove(false);
+    }
+    
+    #region Trap Functions
     public void NextTrap()
     {
         // set the active trap that is currently set to be invisible
@@ -73,30 +94,16 @@ public class DeathRunGM : MinigameManager
         // turn on the next traps active
         activeTrigger.SetActive(false);
         currentTrap++;
-        activeTrigger = triggerZone[currentTrap];
-        activeTrigger.SetActive(true);
-        Debug.Log("trap set");
-
-
-
+        if (currentTrap < triggerZone.Length)
+        {
+            activeTrigger = triggerZone[currentTrap];
+            activeTrigger.SetActive(true);
+            Debug.Log("trap set");
+        }
+        
         // reset the timer and start it in the deathrun scrapper
         dRScraper.trapAfterActivation = dRScraper.trapTimerStart;
         dRScraper.startTimer = true;
-
-
-    }
-
-
-    public void ActivateTrapEffect()
-    {
-        
-        if (trapEffects[currentTrap] != null)
-        {
-
-            trapEffects[currentTrap].SetActive(true);
-            
-        }
-        
     }
 
     public void ActivateTrap()
@@ -108,45 +115,31 @@ public class DeathRunGM : MinigameManager
         {
             Debug.Log("killing player");
             deathAnim.UponDeath();
-            timerOn = true;
-            
-
-            // connect to death script/function and activate it
-
+            Invoke(nameof(KillPlayer), 1f);
         }
         
         // play effects from each trap
         NextTrap();
-
     }
 
-    public override void EndGame(bool hasWon = false)
+    private void ActivateTrapEffect()
     {
-        StopAllCoroutines();
-        PlayerMovement.current.movementSpeed = 0;
-        LoadElevatorScene();
-
-        base.EndGame(hasWon);
+        if (trapEffects[currentTrap] != null)
+        {
+            trapEffects[currentTrap].SetActive(true);
+        }
     }
-
-    protected override void NotAcceptingInputsState()
-    {
-        base.NotAcceptingInputsState();
-    }
-
-    protected override void EndGameState()
-    {
-        base.EndGameState();
-    }
+    #endregion
+    
     protected override IEnumerator MinigameProtocol_CO()
     {
         AcceptingInputsState();
         yield return new WaitForSeconds(_acceptingInputDuration);
         RunningInputsState();
+        
         NotAcceptingInputsState();
         yield return new WaitForSeconds(_notAcceptingInputDuration);
 
         StartCoroutine(MinigameProtocol_CO());
     }
-
 }

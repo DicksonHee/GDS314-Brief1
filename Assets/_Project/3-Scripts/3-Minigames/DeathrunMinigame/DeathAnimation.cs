@@ -12,9 +12,5 @@ public class DeathAnimation : MonoBehaviour
     {
         Debug.Log("Death Accomplished");
         playerAnim.SetTrigger(Death);
-        
-        
     }
-
-
 }
